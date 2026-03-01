@@ -56,9 +56,6 @@ export default function ContactSection() {
             transition={{ type: "spring", stiffness: 200, damping: 40 }}
         >
             <div className="max-w-7xl mx-auto relative group">
-                {/* Decorative background glows - moved outside to stay behind cards */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[600px] bg-purple-500/5 blur-[120px] rounded-full pointer-events-none" />
-
                 <div className="grid lg:grid-cols-2 gap-8 md:gap-12 relative z-10">
                     {/* Left Card – Info */}
                     <motion.div
@@ -70,12 +67,12 @@ export default function ContactSection() {
                         <div className="space-y-10">
                             <div className="space-y-6">
                                 <motion.span
-                                    className="inline-block px-5 py-2 rounded-full bg-purple-100 text-purple-600 text-[10px] font-black uppercase tracking-[0.2em]"
+                                    className="inline-block px-5 py-2 rounded-full bg-logo-purple/10 text-logo-purple text-[10px] font-black uppercase tracking-[0.2em]"
                                 >
                                     Get in Touch
                                 </motion.span>
                                 <h2 className="text-4xl md:text-5xl font-black leading-[1.1] text-[#1A1A1B] tracking-tight">
-                                    Let's build the <span className="text-purple-600">future</span> together.
+                                    Let's build the <span className="text-logo-pink">future</span> together.
                                 </h2>
                                 <p className="text-gray-500 text-lg leading-relaxed max-w-md font-medium">
                                     Whether you're interested in joining, partnering, or just learning more, we're here to connect.
@@ -83,36 +80,100 @@ export default function ContactSection() {
                             </div>
 
                             <div className="space-y-8">
-                                <div className="flex items-center gap-6 group/link">
-                                    <div className="size-16 rounded-[24px] bg-white shadow-sm border border-gray-100 flex items-center justify-center text-purple-600 group-hover/link:scale-110 group-hover/link:bg-purple-600 group-hover/link:text-white transition-all duration-500">
+                                <motion.div className="flex items-center gap-6 group/link cursor-pointer"
+                                    initial={{ x: -20, opacity: 0 }}
+                                    whileInView={{ x: 0, opacity: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.1 }}
+                                    whileHover="hover"
+                                >
+                                    <motion.div
+                                        className="size-16 rounded-[24px] bg-white shadow-sm border border-gray-100 flex items-center justify-center text-logo-purple"
+                                        variants={{
+                                            hover: { scale: 1.05, backgroundColor: "#F5F3FF", borderColor: "#DDD6FE" }
+                                        }}
+                                        transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                                    >
                                         <Mail size={28} />
-                                    </div>
+                                    </motion.div>
                                     <div>
                                         <p className="text-[10px] text-gray-400 uppercase font-black tracking-[0.2em] mb-1">Email Us</p>
-                                        <a href="mailto:contact@enigma-cse.org" className="text-[#1A1A1B] text-xl font-black hover:text-purple-600 transition-colors tracking-tight">contact@enigma-cse.org</a>
+                                        <motion.a
+                                            href="mailto:contact@enigma-cse.org"
+                                            className="text-[#1A1A1B] text-xl font-black tracking-tight"
+                                            variants={{
+                                                hover: { color: "var(--color-logo-purple)" }
+                                            }}
+                                            transition={{ duration: 0.2 }}
+                                        >
+                                            contact@enigma-cse.org
+                                        </motion.a>
                                     </div>
-                                </div>
+                                </motion.div>
 
-                                <div className="flex items-center gap-6 group/link">
-                                    <div className="size-16 rounded-[24px] bg-white shadow-sm border border-gray-100 flex items-center justify-center text-[#7B2FF2] group-hover/link:scale-110 group-hover/link:bg-[#7B2FF2] group-hover/link:text-white transition-all duration-500">
+                                <motion.div className="flex items-center gap-6 group/link cursor-pointer"
+                                    initial={{ x: -20, opacity: 0 }}
+                                    whileInView={{ x: 0, opacity: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.2 }}
+                                    whileHover="hover"
+                                >
+                                    <motion.div
+                                        className="size-16 rounded-[24px] bg-white shadow-sm border border-gray-100 flex items-center justify-center text-logo-pink"
+                                        variants={{
+                                            hover: { scale: 1.05, backgroundColor: "var(--color-logo-pink-50)", borderColor: "var(--color-logo-pink-200)" }
+                                        }}
+                                        transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                                    >
                                         <Cpu size={28} />
-                                    </div>
+                                    </motion.div>
                                     <div>
                                         <p className="text-[10px] text-gray-400 uppercase font-black tracking-[0.2em] mb-1">Technical Support</p>
-                                        <a href="mailto:tech@enigma-cse.org" className="text-[#1A1A1B] text-xl font-black hover:text-[#7B2FF2] transition-colors tracking-tight">tech@enigma-cse.org</a>
+                                        <motion.a
+                                            href="mailto:tech@enigma-cse.org"
+                                            className="text-[#1A1A1B] text-xl font-black tracking-tight"
+                                            variants={{
+                                                hover: { color: "var(--color-logo-pink)" }
+                                            }}
+                                            transition={{ duration: 0.2 }}
+                                        >
+                                            tech@enigma-cse.org
+                                        </motion.a>
                                     </div>
-                                </div>
+                                </motion.div>
 
-                                <div className="flex items-center gap-6 group/link">
-                                    <div className="size-16 rounded-[24px] bg-white shadow-sm border border-gray-100 flex items-center justify-center text-blue-600 group-hover/link:scale-110 group-hover/link:bg-blue-600 group-hover/link:text-white transition-all duration-500">
+                                <motion.div className="flex items-center gap-6 group/link cursor-pointer"
+                                    initial={{ x: -20, opacity: 0 }}
+                                    whileInView={{ x: 0, opacity: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.3 }}
+                                    whileHover="hover"
+                                >
+                                    <motion.div
+                                        className="size-16 rounded-[24px] bg-white shadow-sm border border-gray-100 flex items-center justify-center text-logo-red"
+                                        variants={{
+                                            hover: { scale: 1.05, backgroundColor: "var(--color-logo-red-50)", borderColor: "var(--color-logo-red-200)" }
+                                        }}
+                                        transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                                    >
                                         <MapPin size={28} />
-                                    </div>
+                                    </motion.div>
                                     <div>
                                         <p className="text-[10px] text-gray-400 uppercase font-black tracking-[0.2em] mb-1">Locate Us</p>
-                                        <p className="text-[#1A1A1B] text-xl font-black tracking-tight">Computer Science Block, NCERC</p>
+                                        <motion.p
+                                            className="text-[#1A1A1B] text-xl font-black tracking-tight"
+                                            variants={{
+                                                hover: { color: "var(--color-logo-red)" }
+                                            }}
+                                            transition={{ duration: 0.2 }}
+                                        >
+                                            Computer Science Block, NCERC
+                                        </motion.p>
                                     </div>
-                                </div>
+                                </motion.div>
                             </div>
+
+
                         </div>
                     </motion.div>
 
@@ -133,7 +194,7 @@ export default function ContactSection() {
                                     value={formData.name}
                                     onChange={handleChange}
                                     placeholder="Enter your name"
-                                    className={`w-full bg-white/60 border ${error && !formData.name ? 'border-red-300 ring-4 ring-red-500/10' : 'border-white'} rounded-[24px] p-5 focus:outline-none focus:ring-4 focus:ring-purple-500/10 focus:border-purple-300 transition-all font-bold text-[#1A1A1B] placeholder-gray-300 shadow-sm`}
+                                    className={`w-full bg-white/60 border ${error && !formData.name ? 'border-red-300 ring-4 ring-red-500/10' : 'border-white'} rounded-[24px] p-5 focus:outline-none focus:ring-4 focus:ring-logo-purple/10 focus:border-logo-purple/30 transition-all font-bold text-[#1A1A1B] placeholder-gray-300 shadow-sm`}
                                 />
                             </div>
 
@@ -145,13 +206,13 @@ export default function ContactSection() {
                                         name="type"
                                         value={formData.type}
                                         onChange={handleChange}
-                                        className="w-full bg-white/60 border border-white rounded-[24px] p-5 focus:outline-none focus:ring-4 focus:ring-purple-500/10 focus:border-purple-300 transition-all font-bold text-[#1A1A1B] appearance-none cursor-pointer pr-12 shadow-sm"
+                                        className="w-full bg-white/60 border border-white rounded-[24px] p-5 focus:outline-none focus:ring-4 focus:ring-logo-purple/10 focus:border-logo-purple/30 transition-all font-bold text-[#1A1A1B] appearance-none cursor-pointer pr-12 shadow-sm"
                                     >
                                         <option value="general">General Inquiry</option>
                                         <option value="technical">Technical Suggestion</option>
                                         <option value="collaboration">Collaboration</option>
                                     </select>
-                                    <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400 group-focus-within/select:text-purple-600 transition-colors">
+                                    <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400 group-focus-within/select:text-logo-purple transition-colors">
                                         <svg className="size-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
                                         </svg>
@@ -168,7 +229,7 @@ export default function ContactSection() {
                                     onChange={handleChange}
                                     placeholder="Tell us about your project or query..."
                                     rows={5}
-                                    className={`w-full bg-white/60 border ${error && !formData.message ? 'border-red-300 ring-4 ring-red-500/10' : 'border-white'} rounded-[24px] p-5 focus:outline-none focus:ring-4 focus:ring-purple-500/10 focus:border-purple-300 transition-all font-bold text-[#1A1A1B] placeholder-gray-300 resize-none shadow-sm`}
+                                    className={`w-full bg-white/60 border ${error && !formData.message ? 'border-red-300 ring-4 ring-red-500/10' : 'border-white'} rounded-[24px] p-5 focus:outline-none focus:ring-4 focus:ring-logo-purple/10 focus:border-logo-purple/30 transition-all font-bold text-[#1A1A1B] placeholder-gray-300 resize-none shadow-sm`}
                                 />
                             </div>
 
@@ -205,7 +266,7 @@ export default function ContactSection() {
                                         type="submit"
                                         aria-label="Send message via email"
                                         disabled={status === "sending"}
-                                        className={`group flex items-center justify-center gap-4 w-full py-6 rounded-[28px] text-white font-black text-xs uppercase tracking-[0.2em] transition-all mt-4 active:scale-95 shadow-lg ${status === "sending" ? "bg-gray-400 cursor-not-allowed" : "bg-[#7B2FF2] hover:bg-[#6a25d6] hover:shadow-xl hover:shadow-purple-500/20"}`}
+                                        className={`group flex items-center justify-center gap-4 w-full py-6 rounded-[28px] text-white font-black text-xs uppercase tracking-[0.2em] transition-all mt-4 active:scale-95 shadow-lg ${status === "sending" ? "bg-gray-400 cursor-not-allowed" : "bg-linear-to-r from-logo-purple via-logo-pink to-logo-red hover:opacity-90 hover:shadow-xl hover:shadow-logo-purple/30"}`}
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
                                         exit={{ opacity: 0 }}

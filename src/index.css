@@ -3,21 +3,28 @@
 
 @theme {
     --font-sans: 'Poppins', sans-serif;
+    --color-logo-purple: #9c52f1;
+    --color-logo-pink: #ca54a0;
+    --color-logo-red: #e35d72;
 }
 
-html {
-    scroll-padding-top: 120px;
-    overflow-x: hidden;
-}
+@layer base {
+    html {
+        scroll-padding-top: 120px;
+        height: auto;
+    }
 
-section,
-[id] {
-    scroll-margin-top: 120px;
-}
+    section,
+    [id] {
+        scroll-margin-top: 120px;
+    }
 
-body {
-    @apply bg-[#FDFDFF] text-[#1A1A1B] text-sm antialiased;
-    overflow-x: hidden;
+    body {
+        @apply bg-[#FDFDFF] text-[#1A1A1B] text-sm antialiased;
+        min-height: 100vh;
+        overscroll-behavior: none;
+    }
+
 }
 
 @layer components {
@@ -27,5 +34,56 @@ body {
 
     .btn {
         @apply cursor-pointer rounded-full px-8 py-2.5 font-medium transition hover:opacity-90 active:scale-98;
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes blobDrift {
+
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate3d(30px, -50px, 0) scale(1.1);
+    }
+
+    66% {
+        transform: translate3d(-20px, 20px, 0) scale(0.9);
+    }
+}
+
+.animate-float {
+    animation: float 4s ease-in-out infinite;
+}
+
+.animate-blob {
+    animation: blobDrift 20s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    ::before,
+    ::after {
+        animation-delay: -1ms !important;
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        background-attachment: initial !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0s !important;
+        transition-delay: 0s !important;
     }
 }

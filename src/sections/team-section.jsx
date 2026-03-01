@@ -3,20 +3,21 @@ import SectionTitle from "../components/section-title";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { GithubIcon, LinkedinIcon, Mail, ChevronDown, ChevronUp } from "lucide-react";
+import MagneticButton from "../components/animations/MagneticButton";
 
 export default function TeamSection() {
     const ref = useRef([]);
     const [showAll, setShowAll] = useState(false);
 
     const members = [
-        { name: "Sarah Jenkins", role: "President", color: "from-purple-500 to-blue-500" },
-        { name: "David Chen", role: "Vice President", color: "from-blue-500 to-cyan-500" },
-        { name: "Emily Rodriguez", role: "Technical Lead", color: "from-emerald-500 to-teal-500" },
-        { name: "James Wilson", role: "Events Coordinator", color: "from-orange-500 to-rose-500" },
-        { name: "Michael Park", role: "Design Lead", color: "from-pink-500 to-rose-500" },
-        { name: "Sophia Miller", role: "PR Manager", color: "from-yellow-400 to-orange-500" },
-        { name: "Alex Rivera", role: "Treasurer", color: "from-indigo-500 to-blue-600" },
-        { name: "Olivia Brown", role: "Content Writer", color: "from-green-400 to-emerald-600" },
+        { name: "Sarah Jenkins", role: "President", color: "from-logo-purple to-logo-pink" },
+        { name: "David Chen", role: "Vice President", color: "from-logo-pink to-logo-red" },
+        { name: "Emily Rodriguez", role: "Technical Lead", color: "from-logo-red to-logo-purple" },
+        { name: "James Wilson", role: "Events Coordinator", color: "from-logo-purple via-logo-pink to-logo-red" },
+        { name: "Michael Park", role: "Design Lead", color: "from-logo-pink to-logo-red" },
+        { name: "Sophia Miller", role: "PR Manager", color: "from-logo-red to-logo-pink" },
+        { name: "Alex Rivera", role: "Treasurer", color: "from-logo-purple to-logo-pink" },
+        { name: "Olivia Brown", role: "Content Writer", color: "from-logo-pink to-logo-purple" },
     ];
 
     const getInitials = (name) => {
@@ -41,63 +42,112 @@ export default function TeamSection() {
                             initial={{ y: 30, opacity: 0, scale: 0.9 }}
                             animate={{ y: 0, opacity: 1, scale: 1 }}
                             exit={{ y: 20, opacity: 0, scale: 0.95 }}
-                            whileHover={{ y: -10, boxShadow: "0 40px 80px -20px rgba(123, 47, 242, 0.15)" }}
+                            whileHover="hover"
+                            variants={{
+                                hover: {
+                                    y: -10,
+                                    boxShadow: "0 40px 80px -20px rgba(156, 82, 241, 0.15)"
+                                }
+                            }}
                             transition={{
                                 delay: index * 0.05,
                                 duration: 0.5,
-                                ease: "circOut"
+                                ease: [0.22, 1, 0.36, 1]
                             }}
                         >
                             {/* Interactive Avatar */}
-                            <div className={`relative size-32 rounded-3xl bg-linear-to-br ${member.color} p-1 shadow-xl group-hover:rotate-6 transition-transform duration-500`}>
+                            <motion.div
+                                className={`relative size-32 rounded-3xl bg-linear-to-br ${member.color} p-1 shadow-xl`}
+                                variants={{
+                                    hover: { rotate: 6 }
+                                }}
+                                transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                            >
                                 <div className="flex h-full w-full items-center justify-center rounded-[calc(1.5rem-4px)] bg-white text-3xl font-black text-transparent bg-clip-text bg-linear-to-br from-gray-900 to-gray-600">
                                     {getInitials(member.name)}
                                 </div>
-                                <div className="absolute -bottom-3 -right-3 size-10 rounded-xl bg-white shadow-xl flex items-center justify-center text-purple-600 scale-0 group-hover:scale-100 transition-all duration-300 hover:bg-purple-600 hover:text-white cursor-pointer">
+                                <motion.div
+                                    className="absolute -bottom-3 -right-3 size-10 rounded-xl bg-white shadow-xl flex items-center justify-center text-logo-purple cursor-pointer"
+                                    variants={{
+                                        hover: { scale: 1 }
+                                    }}
+                                    initial={{ scale: 0 }}
+                                    whileHover={{ backgroundColor: "var(--color-logo-purple)", color: "#ffffff" }}
+                                    transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                                >
                                     <Mail size={16} />
-                                </div>
-                            </div>
+                                </motion.div>
+                            </motion.div>
 
                             <div className="space-y-2 pt-2">
-                                <h3 className="text-2xl font-black text-[#1A1A1B] group-hover:text-purple-600 transition-colors tracking-tight">
+                                <motion.h3
+                                    className="text-2xl font-black text-[#1A1A1B] tracking-tight"
+                                    variants={{
+                                        hover: { color: "var(--color-logo-purple)" }
+                                    }}
+                                >
                                     {member.name}
-                                </h3>
-                                <p className="text-purple-600 font-black text-[10px] uppercase tracking-[0.2em]">
+                                </motion.h3>
+                                <p className="text-logo-pink font-black text-[10px] uppercase tracking-[0.2em]">
                                     {member.role}
                                 </p>
                             </div>
 
-                            <div className="h-1 w-12 bg-purple-100 rounded-full transition-all group-hover:w-24 group-hover:bg-purple-500" />
+                            <motion.div
+                                className="h-1 bg-logo-purple/10 rounded-full"
+                                variants={{
+                                    hover: { width: 96, backgroundColor: "var(--color-logo-purple)" }
+                                }}
+                                initial={{ width: 48 }}
+                                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                            />
 
                             <div className="flex items-center gap-6 pt-2">
-                                <a href="#" className="p-3 rounded-2xl bg-gray-50 text-gray-400 hover:text-purple-600 hover:bg-purple-100 transition-all duration-300">
+                                <motion.a
+                                    href="#"
+                                    className="p-3 rounded-2xl bg-gray-50 text-gray-400"
+                                    whileHover={{ scale: 1.1, backgroundColor: "#F3E8FF", color: "#7B2FF2" }}
+                                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                                >
                                     <LinkedinIcon className="size-5" />
-                                </a>
-                                <a href="#" className="p-3 rounded-2xl bg-gray-50 text-gray-400 hover:text-purple-500 hover:bg-purple-100 transition-all duration-300">
+                                </motion.a>
+                                <motion.a
+                                    href="#"
+                                    className="p-3 rounded-2xl bg-gray-50 text-gray-400"
+                                    whileHover={{ scale: 1.1, backgroundColor: "#F3E8FF", color: "#7B2FF2" }}
+                                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                                >
                                     <GithubIcon className="size-5" />
-                                </a>
+                                </motion.a>
                             </div>
                         </motion.div>
                     ))}
                 </AnimatePresence>
             </div>
 
-            <motion.button
-                onClick={() => setShowAll(!showAll)}
-                className="mt-16 group flex items-center gap-3 px-10 py-5 rounded-full bg-[#1A1A1B] text-white font-black text-xs uppercase tracking-widest shadow-2xl shadow-black/10 hover:shadow-purple-500/20 transition-all active:scale-95"
-                whileHover={{ scale: 1.05 }}
-            >
-                {showAll ? (
-                    <>
-                        Show Less <ChevronUp className="size-5" />
-                    </>
-                ) : (
-                    <>
-                        View All Members <ChevronDown className="size-5" />
-                    </>
-                )}
-            </motion.button>
+            <div className="mt-16">
+                <MagneticButton>
+                    <motion.button
+                        onClick={() => setShowAll(!showAll)}
+                        className="group flex items-center gap-3 px-10 py-5 rounded-full bg-[#1A1A1B] text-white font-black text-xs uppercase tracking-widest shadow-2xl shadow-black/10 active:scale-95 transition-all"
+                        whileHover={{
+                            backgroundColor: "#2E2E2F",
+                            boxShadow: "0 20px 40px -10px rgba(156, 82, 241, 0.3)"
+                        }}
+                        transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                    >
+                        {showAll ? (
+                            <>
+                                Show Less <ChevronUp className="size-5" />
+                            </>
+                        ) : (
+                            <>
+                                View All Members <ChevronDown className="size-5" />
+                            </>
+                        )}
+                    </motion.button>
+                </MagneticButton>
+            </div>
         </section>
     );
 }
-

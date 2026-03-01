@@ -3,8 +3,11 @@ import SectionTitle from "../components/section-title";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { XIcon, ChevronLeft, ChevronRight, Calendar, ArrowRight, Share2, MapPin } from "lucide-react";
+import MagneticButton from "../components/animations/MagneticButton";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 export default function EventsSection() {
+   const isMobile = useIsMobile();
    const [selectedEvent, setSelectedEvent] = useState(null);
    const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -74,11 +77,13 @@ export default function EventsSection() {
       setSelectedEvent(event);
       setCurrentImageIndex(0);
       document.body.style.overflow = "hidden";
+      window.lenis?.stop();
    };
 
    const closeModal = () => {
       setSelectedEvent(null);
       document.body.style.overflow = "auto";
+      window.lenis?.start();
    };
 
    const nextImage = (e) => {
@@ -102,7 +107,7 @@ export default function EventsSection() {
    };
 
    const [showAll, setShowAll] = useState(false);
-   const visibleItems = showAll ? items : items.slice(0, 6);
+   const visibleItems = showAll ? items : items.slice(0, isMobile ? 3 : 6);
 
    return (
       <section className="py-24 md:py-32 flex flex-col items-center bg-[#FDFDFF]/50" id="events">
@@ -118,13 +123,18 @@ export default function EventsSection() {
                      key={event.title + index}
                      className="group relative flex flex-col rounded-[40px] bg-white border border-gray-100 shadow-sm overflow-hidden will-change-transform"
                      initial={{ y: 30, opacity: 0, scale: 0.95 }}
-                     animate={{ y: 0, opacity: 1, scale: 1 }}
-                     exit={{ y: 20, opacity: 0, scale: 0.95 }}
-                     whileInView={{ y: 0, opacity: 1 }}
-                     whileHover={{ y: -10, boxShadow: "0 40px 80px -20px rgba(123, 47, 242, 0.12)" }}
+                     whileInView={{ y: 0, opacity: 1, scale: 1 }}
                      viewport={{ once: true, margin: "-50px" }}
+                     exit={{ y: 20, opacity: 0, scale: 0.95 }}
+                     whileHover="hover"
+                     variants={{
+                        hover: {
+                           y: -10,
+                           boxShadow: "0 40px 80px -20px rgba(156, 82, 241, 0.15)"
+                        }
+                     }}
                      transition={{
-                        delay: index * 0.05,
+                        delay: (index % 3) * 0.1,
                         duration: 0.5,
                         ease: "easeOut"
                      }}
@@ -132,13 +142,17 @@ export default function EventsSection() {
                      {/* Image Container */}
                      <div className="relative h-64 sm:h-72 overflow-hidden">
                         <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/40 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <img
+                        <motion.img
                            src={event.images[0]}
                            alt={event.title}
-                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                           className="w-full h-full object-cover"
+                           variants={{
+                              hover: { scale: 1.1 }
+                           }}
+                           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                         />
                         <div className="absolute top-6 left-6 z-20 flex flex-wrap gap-2">
-                           <span className="px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-[10px] font-black uppercase tracking-widest text-purple-600 shadow-lg">
+                           <span className="px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-[10px] font-black uppercase tracking-widest text-logo-purple shadow-lg">
                               {event.category}
                            </span>
                         </div>
@@ -147,10 +161,10 @@ export default function EventsSection() {
                      {/* Content */}
                      <div className="p-8 sm:p-10 flex flex-col flex-1 relative z-20">
                         <div className="flex items-center gap-2 text-gray-400 text-xs font-bold mb-4 uppercase tracking-widest">
-                           <Calendar size={14} className="text-purple-500" />
+                           <Calendar size={14} className="text-logo-pink" />
                            <span>{event.date}</span>
                         </div>
-                        <h3 className="text-2xl font-black text-[#1A1A1B] leading-tight mb-5 group-hover:text-purple-600 transition-colors tracking-tight">
+                        <h3 className="text-2xl font-black text-[#1A1A1B] leading-tight mb-5 group-hover:text-logo-purple transition-colors tracking-tight">
                            {event.title}
                         </h3>
                         <p className="text-gray-500 text-sm sm:text-base leading-relaxed line-clamp-2 mb-8 font-medium">
@@ -158,21 +172,42 @@ export default function EventsSection() {
                         </p>
 
                         <div className="mt-auto">
-                           <button
-                              onClick={() => openModal(event)}
-                              className="group/btn flex items-center justify-center gap-3 w-full py-5 rounded-[24px] bg-gray-50 text-[#1A1A1B] font-black text-xs uppercase tracking-widest border border-gray-100 hover:bg-[#7B2FF2] hover:text-white hover:border-[#7B2FF2] hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300 active:scale-95"
-                           >
-                              Explore Event
-                              <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
-                           </button>
+                           <MagneticButton>
+                              <motion.button
+                                 onClick={() => openModal(event)}
+                                 className="group/btn flex items-center justify-center gap-3 w-full py-5 rounded-[24px] bg-gray-50 text-[#1A1A1B] font-black text-[10px] uppercase tracking-widest border border-gray-100 active:scale-95"
+                                 whileHover="hover"
+                                 variants={{
+                                    hover: {
+                                       backgroundColor: "#F5F3FF",
+                                       borderColor: "#DDD6FE",
+                                       color: "#9c52f1",
+                                       boxShadow: "0 10px 25px -5px rgba(156, 82, 241, 0.2)"
+                                    }
+                                 }}
+                                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                              >
+                                 Explore Event
+                                 <motion.div
+                                    variants={{
+                                       hover: { x: 5 }
+                                    }}
+                                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                                 >
+                                    <ArrowRight size={16} />
+                                 </motion.div>
+                              </motion.button>
+                           </MagneticButton>
                         </div>
+
+
                      </div>
                   </motion.div>
                ))}
             </AnimatePresence>
          </div>
 
-         {items.length > 6 && (
+         {items.length > (isMobile ? 3 : 6) && (
             <motion.div
                className="mt-20"
                initial={{ opacity: 0 }}
@@ -205,6 +240,7 @@ export default function EventsSection() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   className="fixed inset-0 z-[100] bg-white flex flex-col lg:flex-row overflow-hidden"
+                  data-lenis-prevent
                >
                   {/* Close Button - Always visible top right */}
                   <button
@@ -260,10 +296,10 @@ export default function EventsSection() {
                   </div>
 
                   {/* Right: Content Area */}
-                  <div className="w-full lg:w-1/2 h-[55vh] lg:h-full bg-white flex flex-col p-8 sm:p-12 lg:p-12 overflow-y-auto custom-scrollbar">
+                  <div className="w-full lg:w-1/2 h-[55vh] lg:h-full bg-white flex flex-col p-8 sm:p-12 lg:p-12 overflow-y-auto custom-scrollbar" data-lenis-prevent>
                      <div className="max-w-2xl mx-auto w-full flex flex-col h-full">
                         <div className="mb-6">
-                           <span className="px-5 py-2 rounded-full bg-purple-100 text-purple-600 text-[10px] font-black uppercase tracking-[0.2em]">
+                           <span className="px-5 py-2 rounded-full bg-logo-purple/10 text-logo-purple text-[10px] font-black uppercase tracking-[0.2em]">
                               {selectedEvent.category}
                            </span>
                         </div>
@@ -271,18 +307,18 @@ export default function EventsSection() {
                         <div className="space-y-4 mb-8">
                            <h2 className="text-3xl lg:text-4xl font-black text-[#1A1A1B] leading-[1.1] tracking-tight uppercase">
                               {selectedEvent.title.split(' ').slice(0, -1).join(' ')}
-                              <span className="text-purple-600 block mt-1">
+                              <span className="text-logo-pink block mt-1">
                                  {selectedEvent.title.split(' ').pop()}
                               </span>
                            </h2>
 
                            <div className="space-y-2 pt-1">
                               <div className="flex items-center gap-3 text-gray-500 font-bold text-sm">
-                                 <Calendar size={16} className="text-purple-500" />
+                                 <Calendar size={16} className="text-logo-pink" />
                                  <span>{selectedEvent.date}</span>
                               </div>
                               <div className="flex items-center gap-3 text-gray-500 font-bold text-sm">
-                                 <MapPin size={16} className="text-purple-500" />
+                                 <MapPin size={16} className="text-logo-pink" />
                                  <span>{selectedEvent.location || "NCERC Campus"}</span>
                               </div>
                            </div>
@@ -301,12 +337,12 @@ export default function EventsSection() {
                            <div className="flex items-center gap-4">
                               <div className="flex -space-x-3">
                                  {[1, 2, 3, 4].map(i => (
-                                    <div key={i} className="size-8 rounded-full border-2 border-white bg-gray-100 ring-2 ring-gray-50/50" />
+                                    <div key={i} className={`size-8 rounded-full border-2 border-white bg-linear-to-br ${i % 2 === 0 ? 'from-logo-purple to-logo-pink' : 'from-logo-pink to-logo-red'}`} />
                                  ))}
                               </div>
                               <p className="text-[10px] text-gray-400 font-bold italic">Join 40+ others planning to attend</p>
                            </div>
-                           <button className="flex items-center gap-2 text-purple-600 font-black uppercase text-[10px] tracking-widest hover:translate-x-1 transition-transform">
+                           <button className="flex items-center gap-2 text-logo-purple font-black uppercase text-[10px] tracking-widest hover:translate-x-1 transition-transform">
                               Share Event <Share2 size={14} />
                            </button>
                         </div>

@@ -9,7 +9,13 @@ import EventsSection from "./sections/events-section";
 import TeamSection from "./sections/team-section";
 import ContactSection from "./sections/contact-section";
 
+import { useIsMobile } from "./hooks/useIsMobile";
+import { useReducedMotion } from "./hooks/useReducedMotion";
+
 export default function App() {
+    const isMobile = useIsMobile();
+    const reducedMotion = useReducedMotion();
+
     useEffect(() => {
         // Force scroll to top on refresh
         window.history.scrollRestoration = 'manual';
@@ -17,16 +23,15 @@ export default function App() {
     }, []);
 
     return (
-        <>
+        <div className="overflow-hidden min-h-screen relative">
             <LenisScroll />
             <Navbar />
 
-            {/* Light Mode Background */}
-            <div className="fixed inset-0 -z-20 bg-[#FDFDFF]">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-purple-500/5 blur-[120px]" />
-            </div>
+            {/* Clean Background */}
+            <div className="fixed inset-0 -z-20 bg-[#FDFDFF] pointer-events-none" />
 
-            <main className='px-0 overflow-x-hidden'>
+
+            <main className='px-0'>
                 {/* Hero */}
                 <HeroSection />
 
@@ -44,6 +49,7 @@ export default function App() {
             </main>
 
             <Footer />
-        </>
+        </div>
     );
+
 }

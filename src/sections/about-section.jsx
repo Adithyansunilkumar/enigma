@@ -9,22 +9,22 @@ export default function AboutSection() {
             icon: Target,
             title: "Mission",
             text: "Empowering CS students through hands-on technical workshops, hackathons, and real-world project development.",
-            color: "text-purple-600",
-            bg: "bg-purple-50"
+            color: "text-logo-purple",
+            bg: "bg-logo-purple/10"
         },
         {
             icon: Eye,
             title: "Vision",
             text: "To bridge the gap between academic learning and industry demands, fostering a culture of innovation and excellence.",
-            color: "text-blue-600",
-            bg: "bg-blue-50"
+            color: "text-logo-pink",
+            bg: "bg-logo-pink/10"
         },
         {
             icon: Sparkles,
             title: "Values",
             text: "Collaboration, integrity, and a relentless passion for technology that drives meaningful community impact.",
-            color: "text-emerald-600",
-            bg: "bg-emerald-50"
+            color: "text-logo-red",
+            bg: "bg-logo-red/10"
         }
     ];
 
@@ -37,11 +37,12 @@ export default function AboutSection() {
 
             <motion.div
                 className="max-w-4xl text-center px-6 mt-12"
-                initial={{ opacity: 0, scale: 1.05 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
             >
-                <p className="text-gray-500 leading-relaxed text-lg sm:text-xl font-medium italic border-l-4 border-purple-500 pl-6 py-2">
+                <p className="text-gray-500 leading-relaxed text-lg sm:text-xl font-medium italic border-l-4 border-logo-purple pl-6 py-2">
                     "A vibrant community dedicated to exploring new technologies, fostering innovation, and building a strong professional network."
                 </p>
             </motion.div>
@@ -50,9 +51,10 @@ export default function AboutSection() {
                 {cards.map((card, index) => (
                     <motion.div
                         key={index}
-                        className="p-8 md:p-10 rounded-[32px] glass border border-white/50 relative overflow-hidden group shadow-sm hover:shadow-2xl hover:shadow-purple-500/10 transition-shadow duration-500"
+                        className="p-8 md:p-10 rounded-[32px] glass border border-white/50 relative overflow-hidden group shadow-sm transition-all duration-500"
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
+                        whileHover={{ y: -10, scale: 1.02, boxShadow: "0 40px 80px -20px rgba(156, 82, 241, 0.15)" }}
                         viewport={{ once: true, margin: "-50px" }}
                         transition={{
                             delay: index * 0.1,
@@ -60,12 +62,13 @@ export default function AboutSection() {
                             ease: "easeOut"
                         }}
                     >
-                        <div className="absolute -top-10 -right-10 size-32 bg-purple-500/5 blur-3xl rounded-full group-hover:bg-purple-500/10 transition-colors" />
+
+                        <div className="absolute -top-10 -right-10 size-32 bg-logo-purple/5 blur-3xl rounded-full group-hover:bg-logo-purple/10 transition-colors" />
 
                         <div className={`size-14 rounded-2xl ${card.bg} ${card.color} flex items-center justify-center mb-8 shadow-sm group-hover:scale-110 transition-transform duration-500`}>
                             <card.icon size={28} />
                         </div>
-                        <h3 className="text-2xl font-black text-[#1A1A1B] mb-4 tracking-tight group-hover:text-purple-600 transition-colors">{card.title}</h3>
+                        <h3 className="text-2xl font-black text-[#1A1A1B] mb-4 tracking-tight group-hover:text-logo-purple transition-colors">{card.title}</h3>
                         <p className="text-gray-500 leading-relaxed text-sm sm:text-base font-medium">
                             {card.text}
                         </p>

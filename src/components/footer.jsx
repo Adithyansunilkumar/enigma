@@ -37,9 +37,17 @@ export default function Footer() {
                             { icon: InstagramIcon, href: "#" },
                             { icon: GithubIcon, href: "#" }
                         ].map((social, i) => (
-                            <a key={i} href={social.href} className="size-11 rounded-xl bg-gray-50 flex items-center justify-center text-gray-400 hover:text-purple-600 hover:bg-purple-100 hover:-translate-y-1 transition-all duration-300 shadow-sm">
+                            <motion.a
+                                key={i}
+                                href={social.href}
+                                className="size-11 rounded-xl bg-gray-50 flex items-center justify-center text-gray-400 hover:text-purple-600 hover:bg-purple-100 hover:-translate-y-1 transition-all duration-300 shadow-sm"
+                                initial={{ opacity: 0, y: 10 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                            >
                                 <social.icon className="size-5" />
-                            </a>
+                            </motion.a>
                         ))}
                     </div>
                 </div>
@@ -49,15 +57,22 @@ export default function Footer() {
                     <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-[#1A1A1B]">Quick Links</h4>
                     <ul className="space-y-4">
                         {quickLinks.map((link, index) => (
-                            <li key={index}>
+                            <motion.li
+                                key={index}
+                                initial={{ opacity: 0, x: -10 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.05 }}
+                            >
                                 <a href={link.href} className="text-gray-500 text-sm font-bold hover:text-purple-600 transition-colors flex items-center gap-2 group">
                                     <span className="size-1 rounded-full bg-purple-200 group-hover:bg-purple-600 transition-colors" />
                                     {link.name}
                                 </a>
-                            </li>
+                            </motion.li>
                         ))}
                     </ul>
                 </div>
+
 
                 {/* Support */}
                 <div className="space-y-6">

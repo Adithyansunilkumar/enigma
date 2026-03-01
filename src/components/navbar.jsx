@@ -11,7 +11,6 @@ export default function Navbar() {
         { name: 'About', href: '#about' },
         { name: 'Events', href: '#events' },
         { name: 'Team', href: '#team' },
-        { name: 'Connect', href: '#contact' },
     ];
 
     useEffect(() => {
@@ -34,7 +33,7 @@ export default function Navbar() {
     return (
         <>
             <motion.nav
-                className={`fixed top-0 left-0 right-0 z-50 flex w-full items-center justify-between px-6 py-4 md:px-16 lg:px-24 transition-all duration-300 bg-[#FBF8FF] ${isScrolled ? 'border-b border-gray-100 shadow-sm' : 'border-b border-transparent'}`}
+                className={`fixed top-0 left-0 right-0 z-50 flex w-full items-center justify-between px-6 py-4 md:px-16 lg:px-24 transition-all duration-300 bg-[#FFFFFF] ${isScrolled ? 'border-b border-gray-100 shadow-sm' : 'border-b border-transparent'}`}
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ type: "spring", stiffness: 200, damping: 25 }}
@@ -53,14 +52,14 @@ export default function Navbar() {
                         <a
                             key={link.name}
                             href={link.href}
-                            className='text-sm font-semibold text-[#1A1A1B] transition-all hover:text-purple-600 relative group'
+                            className='text-sm font-semibold text-[#1A1A1B] transition-all hover:text-logo-purple relative group'
                         >
                             {link.name}
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-600 transition-all group-hover:w-full" />
+                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-logo-purple transition-all group-hover:w-full" />
                         </a>
                     ))}
-                    <a href="#contact" className="btn bg-[#7B2FF2] text-white px-6 py-2 shadow-lg shadow-purple-500/20 hover:scale-105 transition-all text-sm font-bold">
-                        Join Us
+                    <a href="#contact" className="btn bg-linear-to-r from-logo-purple via-logo-pink to-logo-red text-white px-6 py-2 shadow-lg shadow-logo-purple/30 hover:scale-105 transition-all text-sm font-bold">
+                        Connect
                     </a>
                 </div>
 
@@ -104,7 +103,7 @@ export default function Navbar() {
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: idx * 0.1 }}
                                         onClick={() => setIsOpen(false)}
-                                        className="text-2xl font-bold text-[#1A1A1B] hover:text-purple-600 transition-colors border-b border-gray-50 pb-4"
+                                        className="text-2xl font-bold text-[#1A1A1B] hover:text-logo-purple transition-colors border-b border-gray-50 pb-4"
                                     >
                                         {link.name}
                                     </motion.a>
@@ -115,7 +114,7 @@ export default function Navbar() {
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.4 }}
                                     onClick={() => setIsOpen(false)}
-                                    className="mt-4 w-full text-center py-4 bg-[#7B2FF2] text-white rounded-2xl font-black shadow-xl shadow-purple-500/30"
+                                    className="mt-4 w-full text-center py-4 bg-linear-to-r from-logo-purple via-logo-pink to-logo-red text-white rounded-2xl font-black shadow-xl shadow-logo-purple/30"
                                 >
                                     GET IN TOUCH
                                 </motion.a>
