@@ -1,0 +1,320 @@
+// ENIGMA – Events & Workshops Section
+import SectionTitle from "../components/section-title";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { XIcon, ChevronLeft, ChevronRight, Calendar, ArrowRight, Share2, MapPin } from "lucide-react";
+
+export default function EventsSection() {
+   const [selectedEvent, setSelectedEvent] = useState(null);
+   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+   const items = [
+      {
+         title: "ASSOCIATION INAUGURATION",
+         category: "Special Event",
+         date: "October 15, 2026",
+         location: "Main Auditorium, Campus North",
+         images: [
+            "/assets/events/inauguration/inauguration.jpg",
+            "/assets/events/inauguration/inauguration1.jpg",
+            "/assets/events/inauguration/inauguration2.jpg",
+            "/assets/events/inauguration/inauguration3.jpg",
+         ],
+         description:
+            "The official grand inauguration of ENIGMA, the Computer Science and Engineering Students Association of Nehru College of Engineering and Research Centre (NCERC). This landmark event marks the formal commencement of our association's activities, featuring esteemed guest lecturers, the unveiling of our annual roadmap, and a vision for future technical excellence and innovation.",
+      },
+      {
+         title: "LOGO DESIGNING COMPETITION",
+         category: "Competition",
+         date: "November 02, 2026",
+         location: "Design Lab, Block C",
+         images: ["/assets/events/logo-designing/logo-designing.jpg"],
+         description:
+            "A creative challenge to design a unique logo that represents ENIGMA's values of innovation and excellence. Open to all students to showcase their artistic and digital branding skills.",
+      },
+      {
+         title: "HARDWARE WORKSHOP",
+         category: "Workshop",
+         date: "December 10, 2026",
+         location: "Hardware Lab, Campus South",
+         images: ["/assets/events/hardware-workshop/hardware-workshop.jpg"],
+         description:
+            "A hands-on workshop to explore the basics of computer hardware with expert guidance. Includes dismantling and reassembling systems to understand component functionality.",
+      },
+      {
+         title: "COMPUTER NETWORKS",
+         category: "Workshop",
+         date: "August 11 2025",
+         location: "Networking Lab, NCERC",
+         images: ["/assets/events/computer-networks/computer-networks.jpg"],
+         description:
+            "A 2-Day Workshop on Computer Networks: LAN Implementation. Dive into local area networks, gain hands-on experience in configuring and troubleshooting devices.",
+      },
+      {
+         title: "E-FOOTBALL TOURNAMENT",
+         category: "Gaming",
+         date: "September 15 2025",
+         location: "Multi-Purpose Hall",
+         images: ["/assets/events/e-football/e-football.jpg"],
+         description:
+            "The ultimate digital football showdown! Part of ENIGMA's efforts to blend technology with sportsmanship in a high-energy gaming environment.",
+      },
+      {
+         title: "WEB DEVELOPMENT",
+         category: "Technical",
+         date: "January 22 2026",
+         location: "Computing Center, Block B",
+         images: ["/assets/events/web-dev/web-dev.jpg"],
+         description:
+            "An intensive workshop on building and hosting your first website, covering HTML, CSS, and modern hosting solutions.",
+      }
+   ];
+
+   const openModal = (event) => {
+      setSelectedEvent(event);
+      setCurrentImageIndex(0);
+      document.body.style.overflow = "hidden";
+   };
+
+   const closeModal = () => {
+      setSelectedEvent(null);
+      document.body.style.overflow = "auto";
+   };
+
+   const nextImage = (e) => {
+      e.stopPropagation();
+      if (selectedEvent && selectedEvent.images.length > 0) {
+         setCurrentImageIndex(
+            (prev) => (prev + 1) % selectedEvent.images.length,
+         );
+      }
+   };
+
+   const prevImage = (e) => {
+      e.stopPropagation();
+      if (selectedEvent && selectedEvent.images.length > 0) {
+         setCurrentImageIndex(
+            (prev) =>
+               (prev - 1 + selectedEvent.images.length) %
+               selectedEvent.images.length,
+         );
+      }
+   };
+
+   const [showAll, setShowAll] = useState(false);
+   const visibleItems = showAll ? items : items.slice(0, 6);
+
+   return (
+      <section className="py-24 md:py-32 flex flex-col items-center bg-[#FDFDFF]/50" id="events">
+         <SectionTitle
+            title="Our Events & Workshops"
+            description="Experience a blend of technical mastery, creative innovation, and competitive spirit."
+         />
+
+         <div className="mt-16 md:mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 w-full max-w-7xl px-6">
+            <AnimatePresence mode="popLayout">
+               {visibleItems.map((event, index) => (
+                  <motion.div
+                     key={event.title + index}
+                     className="group relative flex flex-col rounded-[40px] bg-white border border-gray-100 shadow-sm overflow-hidden will-change-transform"
+                     initial={{ y: 30, opacity: 0, scale: 0.95 }}
+                     animate={{ y: 0, opacity: 1, scale: 1 }}
+                     exit={{ y: 20, opacity: 0, scale: 0.95 }}
+                     whileInView={{ y: 0, opacity: 1 }}
+                     whileHover={{ y: -10, boxShadow: "0 40px 80px -20px rgba(123, 47, 242, 0.12)" }}
+                     viewport={{ once: true, margin: "-50px" }}
+                     transition={{
+                        delay: index * 0.05,
+                        duration: 0.5,
+                        ease: "easeOut"
+                     }}
+                  >
+                     {/* Image Container */}
+                     <div className="relative h-64 sm:h-72 overflow-hidden">
+                        <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/40 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <img
+                           src={event.images[0]}
+                           alt={event.title}
+                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        />
+                        <div className="absolute top-6 left-6 z-20 flex flex-wrap gap-2">
+                           <span className="px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-[10px] font-black uppercase tracking-widest text-purple-600 shadow-lg">
+                              {event.category}
+                           </span>
+                        </div>
+                     </div>
+
+                     {/* Content */}
+                     <div className="p-8 sm:p-10 flex flex-col flex-1 relative z-20">
+                        <div className="flex items-center gap-2 text-gray-400 text-xs font-bold mb-4 uppercase tracking-widest">
+                           <Calendar size={14} className="text-purple-500" />
+                           <span>{event.date}</span>
+                        </div>
+                        <h3 className="text-2xl font-black text-[#1A1A1B] leading-tight mb-5 group-hover:text-purple-600 transition-colors tracking-tight">
+                           {event.title}
+                        </h3>
+                        <p className="text-gray-500 text-sm sm:text-base leading-relaxed line-clamp-2 mb-8 font-medium">
+                           {event.description}
+                        </p>
+
+                        <div className="mt-auto">
+                           <button
+                              onClick={() => openModal(event)}
+                              className="group/btn flex items-center justify-center gap-3 w-full py-5 rounded-[24px] bg-gray-50 text-[#1A1A1B] font-black text-xs uppercase tracking-widest border border-gray-100 hover:bg-[#7B2FF2] hover:text-white hover:border-[#7B2FF2] hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300 active:scale-95"
+                           >
+                              Explore Event
+                              <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+                           </button>
+                        </div>
+                     </div>
+                  </motion.div>
+               ))}
+            </AnimatePresence>
+         </div>
+
+         {items.length > 6 && (
+            <motion.div
+               className="mt-20"
+               initial={{ opacity: 0 }}
+               whileInView={{ opacity: 1 }}
+               viewport={{ once: true }}
+               transition={{ delay: 0.5 }}
+            >
+               <button
+                  onClick={() => setShowAll(!showAll)}
+                  className="flex items-center gap-3 px-10 py-5 rounded-full glass font-black text-xs uppercase tracking-widest text-[#1A1A1B] hover:bg-[#1A1A1B] hover:text-white transition-all active:scale-95 shadow-lg"
+               >
+                  {showAll ? (
+                     <>
+                        Show Less <ArrowRight size={16} className="-rotate-90 transition-transform" />
+                     </>
+                  ) : (
+                     <>
+                        View All Events <ArrowRight size={16} className="transition-transform" />
+                     </>
+                  )}
+               </button>
+            </motion.div>
+         )}
+
+         {/* Modern Detail Modal - White Background */}
+         <AnimatePresence>
+            {selectedEvent && (
+               <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="fixed inset-0 z-[100] bg-white flex flex-col lg:flex-row overflow-hidden"
+               >
+                  {/* Close Button - Always visible top right */}
+                  <button
+                     onClick={closeModal}
+                     className="absolute right-6 top-6 sm:right-10 sm:top-10 z-[120] size-12 sm:size-14 rounded-full bg-white shadow-xl flex items-center justify-center text-[#1A1A1B] hover:bg-gray-50 transition-all active:scale-95 border border-gray-100"
+                  >
+                     <XIcon size={24} />
+                  </button>
+
+                  {/* Left: Image Showcase (Full height on large screens) */}
+                  <div className="relative w-full lg:w-1/2 h-[45vh] lg:h-full bg-gray-100 overflow-hidden">
+                     <AnimatePresence mode="wait">
+                        <motion.img
+                           key={currentImageIndex}
+                           src={selectedEvent.images[currentImageIndex]}
+                           initial={{ opacity: 0, scale: 1.05 }}
+                           animate={{ opacity: 1, scale: 1 }}
+                           exit={{ opacity: 0, scale: 0.95 }}
+                           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                           className="w-full h-full object-cover"
+                           alt={selectedEvent.title}
+                        />
+                     </AnimatePresence>
+
+                     {/* Image Navigation */}
+                     {selectedEvent.images.length > 1 && (
+                        <>
+                           <button
+                              onClick={prevImage}
+                              className="absolute left-6 top-1/2 -translate-y-1/2 z-20 size-14 rounded-full bg-black/20 backdrop-blur-md border border-white/10 text-white flex items-center justify-center hover:bg-black/40 transition-all"
+                           >
+                              <ChevronLeft size={32} />
+                           </button>
+                           <button
+                              onClick={nextImage}
+                              className="absolute right-6 top-1/2 -translate-y-1/2 z-20 size-14 rounded-full bg-black/20 backdrop-blur-md border border-white/10 text-white flex items-center justify-center hover:bg-black/40 transition-all"
+                           >
+                              <ChevronRight size={32} />
+                           </button>
+                        </>
+                     )}
+
+                     {/* Dots Indicator */}
+                     <div className="absolute bottom-10 left-10 z-20 flex gap-2">
+                        {selectedEvent.images.map((_, idx) => (
+                           <button
+                              key={idx}
+                              onClick={() => setCurrentImageIndex(idx)}
+                              className={`h-1 rounded-full transition-all duration-500 ${idx === currentImageIndex ? "w-8 bg-white" : "w-2 bg-white/30 hover:bg-white/50"}`}
+                           />
+                        ))}
+                     </div>
+                  </div>
+
+                  {/* Right: Content Area */}
+                  <div className="w-full lg:w-1/2 h-[55vh] lg:h-full bg-white flex flex-col p-8 sm:p-12 lg:p-12 overflow-y-auto custom-scrollbar">
+                     <div className="max-w-2xl mx-auto w-full flex flex-col h-full">
+                        <div className="mb-6">
+                           <span className="px-5 py-2 rounded-full bg-purple-100 text-purple-600 text-[10px] font-black uppercase tracking-[0.2em]">
+                              {selectedEvent.category}
+                           </span>
+                        </div>
+
+                        <div className="space-y-4 mb-8">
+                           <h2 className="text-3xl lg:text-4xl font-black text-[#1A1A1B] leading-[1.1] tracking-tight uppercase">
+                              {selectedEvent.title.split(' ').slice(0, -1).join(' ')}
+                              <span className="text-purple-600 block mt-1">
+                                 {selectedEvent.title.split(' ').pop()}
+                              </span>
+                           </h2>
+
+                           <div className="space-y-2 pt-1">
+                              <div className="flex items-center gap-3 text-gray-500 font-bold text-sm">
+                                 <Calendar size={16} className="text-purple-500" />
+                                 <span>{selectedEvent.date}</span>
+                              </div>
+                              <div className="flex items-center gap-3 text-gray-500 font-bold text-sm">
+                                 <MapPin size={16} className="text-purple-500" />
+                                 <span>{selectedEvent.location || "NCERC Campus"}</span>
+                              </div>
+                           </div>
+                        </div>
+
+                        <div className="space-y-6 flex-1">
+                           <div className="flex flex-col gap-3">
+                              <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">Context & Vision</h4>
+                              <p className="text-gray-600 leading-relaxed text-sm font-medium">
+                                 {selectedEvent.description}
+                              </p>
+                           </div>
+                        </div>
+
+                        <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between">
+                           <div className="flex items-center gap-4">
+                              <div className="flex -space-x-3">
+                                 {[1, 2, 3, 4].map(i => (
+                                    <div key={i} className="size-8 rounded-full border-2 border-white bg-gray-100 ring-2 ring-gray-50/50" />
+                                 ))}
+                              </div>
+                              <p className="text-[10px] text-gray-400 font-bold italic">Join 40+ others planning to attend</p>
+                           </div>
+                           <button className="flex items-center gap-2 text-purple-600 font-black uppercase text-[10px] tracking-widest hover:translate-x-1 transition-transform">
+                              Share Event <Share2 size={14} />
+                           </button>
+                        </div>
+                     </div>
+                  </div>
+               </motion.div>
+            )}
+         </AnimatePresence>
+      </section>
+   );
+}
