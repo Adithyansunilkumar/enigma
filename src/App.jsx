@@ -30,7 +30,6 @@ export default function App() {
             {/* Clean Background */}
             <div className="fixed inset-0 -z-20 bg-[#FDFDFF] pointer-events-none" />
 
-
             <main className='px-0'>
                 {/* Hero */}
                 <HeroSection />
@@ -51,5 +50,4 @@ export default function App() {
             <Footer />
         </div>
     );
-
 }

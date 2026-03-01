@@ -24,7 +24,7 @@ export default function EventsSection() {
             "/assets/events/inauguration/inauguration3.jpg",
          ],
          description:
-            "The official grand inauguration of ENIGMA, the Computer Science and Engineering Students Association of Nehru College of Engineering and Research Centre (NCERC). This landmark event marks the formal commencement of our association's activities, featuring esteemed guest lecturers, the unveiling of our annual roadmap, and a vision for future technical excellence and innovation.",
+            "The grand inauguration of ENIGMA, the CSE Students Association of NCERC, marks the start of our activities, featuring guest lectures, our annual roadmap, and a vision for innovation.",
       },
       {
          title: "LOGO DESIGNING COMPETITION",
@@ -103,6 +103,29 @@ export default function EventsSection() {
                (prev - 1 + selectedEvent.images.length) %
                selectedEvent.images.length,
          );
+      }
+   };
+
+   const handleShare = async (e) => {
+      e.stopPropagation();
+      if (!selectedEvent) return;
+
+      const shareData = {
+         title: `ENIGMA - ${selectedEvent.title}`,
+         text: `Check out this event: ${selectedEvent.title} - ${selectedEvent.category} at NCERC!`,
+         url: window.location.href,
+      };
+
+      try {
+         if (navigator.share) {
+            await navigator.share(shareData);
+         } else {
+            // Fallback: Copy to clipboard
+            await navigator.clipboard.writeText(window.location.href);
+            alert("Event link copied to clipboard!");
+         }
+      } catch (err) {
+         console.error("Error sharing:", err);
       }
    };
 
@@ -305,7 +328,7 @@ export default function EventsSection() {
                         </div>
 
                         <div className="space-y-4 mb-8">
-                           <h2 className="text-3xl lg:text-4xl font-black text-[#1A1A1B] leading-[1.1] tracking-tight uppercase">
+                           <h2 className="text-xl sm:text-3xl lg:text-4xl font-black text-[#1A1A1B] leading-[1.1] tracking-tight uppercase">
                               {selectedEvent.title.split(' ').slice(0, -1).join(' ')}
                               <span className="text-logo-pink block mt-1">
                                  {selectedEvent.title.split(' ').pop()}
@@ -342,7 +365,10 @@ export default function EventsSection() {
                               </div>
                               <p className="text-[10px] text-gray-400 font-bold italic">Join 40+ others planning to attend</p>
                            </div>
-                           <button className="flex items-center gap-2 text-logo-purple font-black uppercase text-[10px] tracking-widest hover:translate-x-1 transition-transform">
+                           <button
+                              onClick={handleShare}
+                              className="flex items-center gap-2 text-logo-purple font-black uppercase text-[10px] tracking-widest hover:translate-x-1 transition-transform"
+                           >
                               Share Event <Share2 size={14} />
                            </button>
                         </div>

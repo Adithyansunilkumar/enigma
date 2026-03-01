@@ -2,11 +2,19 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import MagneticButton from "../components/animations/MagneticButton";
+import DotGridBackground from "../components/background/DotGridBackground";
 
 export default function HeroSection() {
     return (
         <>
-            <section className="flex flex-col items-center pt-24 md:pt-32 pb-24 md:pb-32 px-4" id="hero">
+            <section className="relative overflow-hidden flex flex-col items-center pt-24 md:pt-32 pb-24 md:pb-32 px-4" id="hero">
+                {/* Background Animation */}
+                <div className="absolute inset-0 -z-10 pointer-events-none">
+                    <DotGridBackground />
+                </div>
+
+                {/* Smooth Fade Transition at Bottom */}
+                <div className="absolute bottom-0 left-0 right-0 h-32 md:h-48 bg-linear-to-t from-[#FDFDFF] to-transparent pointer-events-none z-0" />
                 {/* Logo in Hero */}
                 <motion.div
                     initial={{ scale: 0.8, opacity: 0, rotate: -5 }}
