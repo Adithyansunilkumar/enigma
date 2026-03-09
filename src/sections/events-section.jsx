@@ -17,6 +17,7 @@ export default function EventsSection() {
          category: "Special Event",
          date: "October 15, 2026",
          location: "Main Auditorium, Campus North",
+         upcoming: false,
          images: [
             "/assets/events/inauguration/inauguration.jpg",
             "/assets/events/inauguration/inauguration1.jpg",
@@ -31,6 +32,7 @@ export default function EventsSection() {
          category: "Competition",
          date: "November 02, 2026",
          location: "Design Lab, Block C",
+         upcoming: false,
          images: ["/assets/events/logo-designing/logo-designing.jpg"],
          description:
             "A creative challenge to design a unique logo that represents ENIGMA's values of innovation and excellence. Open to all students to showcase their artistic and digital branding skills.",
@@ -38,6 +40,7 @@ export default function EventsSection() {
       {
          title: "HARDWARE WORKSHOP",
          category: "Workshop",
+         upcoming: false,
          date: "December 10, 2026",
          location: "Hardware Lab, Campus South",
          images: ["/assets/events/hardware-workshop/hardware-workshop.jpg"],
@@ -47,6 +50,7 @@ export default function EventsSection() {
       {
          title: "COMPUTER NETWORKS",
          category: "Workshop",
+         upcoming: false,
          date: "August 11 2025",
          location: "Networking Lab, NCERC",
          images: ["/assets/events/computer-networks/computer-networks.jpg"],
@@ -56,6 +60,7 @@ export default function EventsSection() {
       {
          title: "E-FOOTBALL TOURNAMENT",
          category: "Gaming",
+         upcoming: false,
          date: "September 15 2025",
          location: "Multi-Purpose Hall",
          images: ["/assets/events/e-football/e-football.jpg"],
@@ -64,7 +69,8 @@ export default function EventsSection() {
       },
       {
          title: "WEB DEVELOPMENT",
-         category: "Technical",
+         category: "Workshop",
+         upcoming: false,
          date: "January 22 2026",
          location: "Computing Center, Block B",
          images: ["/assets/events/web-dev/web-dev.jpg"],
@@ -174,22 +180,31 @@ export default function EventsSection() {
                            }}
                            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                         />
-                        <div className="absolute top-6 left-6 z-20 flex flex-wrap gap-2">
-                           <span className="px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-[10px] font-black uppercase tracking-widest text-logo-purple shadow-lg">
-                              {event.category}
-                           </span>
-                        </div>
                      </div>
 
                      {/* Content */}
                      <div className="p-8 sm:p-10 flex flex-col flex-1 relative z-20">
-                        <div className="flex items-center gap-2 text-gray-400 text-xs font-bold mb-4 uppercase tracking-widest">
+                        <div className="flex flex-wrap items-center gap-3 mb-6">
+                           <span className="px-3 py-1 rounded-full bg-logo-purple/10 text-logo-purple text-[10px] font-black uppercase tracking-widest border border-logo-purple/10">
+                              {event.category}
+                           </span>
+                           {event.upcoming && (
+                              <span className="px-4 py-1 rounded-full bg-logo-pink/10 text-logo-pink text-[10px] font-black uppercase tracking-widest border border-logo-pink/10 flex items-center gap-2">
+                                 <span className="size-1.5 rounded-full bg-logo-pink animate-pulse" />
+                                 Upcoming
+                              </span>
+                           )}
+                        </div>
+
+                        <h3 className="text-2xl font-black text-[#1A1A1B] leading-tight mb-4 group-hover:text-logo-purple transition-colors tracking-tight">
+                           {event.title}
+                        </h3>
+
+                        <div className="flex items-center gap-2 text-gray-400 text-xs font-bold mb-6 uppercase tracking-widest">
                            <Calendar size={14} className="text-logo-pink" />
                            <span>{event.date}</span>
                         </div>
-                        <h3 className="text-2xl font-black text-[#1A1A1B] leading-tight mb-5 group-hover:text-logo-purple transition-colors tracking-tight">
-                           {event.title}
-                        </h3>
+
                         <p className="text-gray-500 text-sm sm:text-base leading-relaxed line-clamp-2 mb-8 font-medium">
                            {event.description}
                         </p>
@@ -222,8 +237,6 @@ export default function EventsSection() {
                               </motion.button>
                            </MagneticButton>
                         </div>
-
-
                      </div>
                   </motion.div>
                ))}
@@ -321,10 +334,16 @@ export default function EventsSection() {
                   {/* Right: Content Area */}
                   <div className="w-full lg:w-1/2 h-[55vh] lg:h-full bg-white flex flex-col p-8 sm:p-12 lg:p-12 overflow-y-auto custom-scrollbar" data-lenis-prevent>
                      <div className="max-w-2xl mx-auto w-full flex flex-col h-full">
-                        <div className="mb-6">
+                        <div className="mb-6 flex flex-wrap gap-3">
                            <span className="px-5 py-2 rounded-full bg-logo-purple/10 text-logo-purple text-[10px] font-black uppercase tracking-[0.2em]">
                               {selectedEvent.category}
                            </span>
+                           {selectedEvent.upcoming && (
+                              <span className="px-5 py-2 rounded-full bg-logo-pink/10 text-logo-pink text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
+                                 <span className="size-2 rounded-full bg-logo-pink animate-pulse" />
+                                 Upcoming Event
+                              </span>
+                           )}
                         </div>
 
                         <div className="space-y-4 mb-8">
