@@ -30,8 +30,7 @@ export default function EventsSection() {
       {
          title: "LOGO DESIGNING COMPETITION",
          category: "Competition",
-         date: "November 02, 2026",
-         location: "Design Lab, Block C",
+         date: "October 02, 2025",
          upcoming: false,
          images: ["/assets/events/logo-designing/logo-designing.jpg"],
          description:
@@ -41,8 +40,8 @@ export default function EventsSection() {
          title: "HARDWARE WORKSHOP",
          category: "Workshop",
          upcoming: false,
-         date: "December 10, 2026",
-         location: "Hardware Lab, Campus South",
+         date: "August 5, 2025",
+         location: "Aryabhatta Seminar Hall-510",
          images: ["/assets/events/hardware-workshop/hardware-workshop.jpg"],
          description:
             "A hands-on workshop to explore the basics of computer hardware with expert guidance. Includes dismantling and reassembling systems to understand component functionality.",
@@ -52,7 +51,7 @@ export default function EventsSection() {
          category: "Workshop",
          upcoming: false,
          date: "August 11 2025",
-         location: "Networking Lab, NCERC",
+         location: "Advanced Computing Lab 226",
          images: ["/assets/events/computer-networks/computer-networks.jpg"],
          description:
             "A 2-Day Workshop on Computer Networks: LAN Implementation. Dive into local area networks, gain hands-on experience in configuring and troubleshooting devices.",
@@ -62,7 +61,7 @@ export default function EventsSection() {
          category: "Gaming",
          upcoming: false,
          date: "September 15 2025",
-         location: "Multi-Purpose Hall",
+         location: "Aryabhatta Seminar Hall-510",
          images: ["/assets/events/e-football/e-football.jpg"],
          description:
             "The ultimate digital football showdown! Part of ENIGMA's efforts to blend technology with sportsmanship in a high-energy gaming environment.",
@@ -72,7 +71,7 @@ export default function EventsSection() {
          category: "Workshop",
          upcoming: false,
          date: "January 22 2026",
-         location: "Computing Center, Block B",
+         location: "Advanced Computing Lab 226",
          images: ["/assets/events/web-dev/web-dev.jpg"],
          description:
             "An intensive workshop on building and hosting your first website, covering HTML, CSS, and modern hosting solutions.",
