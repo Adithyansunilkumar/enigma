@@ -173,7 +173,7 @@ export default function ContactSection() {
                                             onClick={(e) => e.stopPropagation()}
                                         >
                                             Computer Science Block, NCERC
-                                      </motion.a>
+                                        </motion.a>
                                     </div>
                                 </motion.div>
                             </div>

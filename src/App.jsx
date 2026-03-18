@@ -1,13 +1,14 @@
 // ENIGMA – Main App
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import LenisScroll from "./components/lenis-scroll";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import HeroSection from "./sections/hero-section";
-import AboutSection from "./sections/about-section";
-import EventsSection from "./sections/events-section";
-import TeamSection from "./sections/team-section";
-import ContactSection from "./sections/contact-section";
+
+const AboutSection = lazy(() => import("./sections/about-section"));
+const EventsSection = lazy(() => import("./sections/events-section"));
+const TeamSection = lazy(() => import("./sections/team-section"));
+const ContactSection = lazy(() => import("./sections/contact-section"));
 
 import { useIsMobile } from "./hooks/useIsMobile";
 import { useReducedMotion } from "./hooks/useReducedMotion";
@@ -31,20 +32,16 @@ export default function App() {
             <div className="fixed inset-0 -z-20 bg-[#FDFDFF] pointer-events-none" />
 
             <main className='px-0'>
-                {/* Hero */}
+                {/* Hero - Always loaded immediately */}
                 <HeroSection />
 
-                {/* About Enigma + Stats */}
-                <AboutSection />
-
-                {/* Events & Workshops */}
-                <EventsSection />
-
-                {/* Meet Our Team */}
-                <TeamSection />
-
-                {/* Contact / Connect */}
-                <ContactSection />
+                {/* Below-the-fold sections - Lazy loaded */}
+                <Suspense fallback={<div className="h-screen bg-[#FDFDFF]" />}>
+                    <AboutSection />
+                    <EventsSection />
+                    <TeamSection />
+                    <ContactSection />
+                </Suspense>
             </main>
 
             <Footer />

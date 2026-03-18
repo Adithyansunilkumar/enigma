@@ -15,7 +15,7 @@ export default function EventsSection() {
       {
          title: "ASSOCIATION INAUGURATION",
          category: "Special Event",
-         date: "October 15, 2026",
+         date: "August 8, 2025",
          location: "Main Auditorium, Campus North",
          upcoming: false,
          images: [
@@ -173,6 +173,7 @@ export default function EventsSection() {
                         <motion.img
                            src={event.images[0]}
                            alt={event.title}
+                           loading="lazy"
                            className="w-full h-full object-cover"
                            variants={{
                               hover: { scale: 1.1 }
