@@ -2,7 +2,7 @@
 import SectionTitle from "../components/section-title";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
-import { GithubIcon, LinkedinIcon, Mail, ChevronDown, ChevronUp } from "lucide-react";
+import { LinkedinIcon, Mail, ChevronDown, ChevronUp, User } from "lucide-react";
 import MagneticButton from "../components/animations/MagneticButton";
 
 export default function TeamSection() {
@@ -10,14 +10,18 @@ export default function TeamSection() {
     const [showAll, setShowAll] = useState(false);
 
     const members = [
-        { name: "Sarah Jenkins", role: "President", color: "from-logo-purple to-logo-pink" },
-        { name: "David Chen", role: "Vice President", color: "from-logo-pink to-logo-red" },
-        { name: "Emily Rodriguez", role: "Technical Lead", color: "from-logo-red to-logo-purple" },
-        { name: "James Wilson", role: "Events Coordinator", color: "from-logo-purple via-logo-pink to-logo-red" },
-        { name: "Michael Park", role: "Design Lead", color: "from-logo-pink to-logo-red" },
-        { name: "Sophia Miller", role: "PR Manager", color: "from-logo-red to-logo-pink" },
-        { name: "Alex Rivera", role: "Treasurer", color: "from-logo-purple to-logo-pink" },
-        { name: "Olivia Brown", role: "Content Writer", color: "from-logo-pink to-logo-purple" },
+        { name: "Alokh K", role: "Vice President", color: "from-logo-pink to-logo-red", image: "/assets/team/alokh.jpg", linkedin: "https://www.linkedin.com/in/alokh-k", email: "alokhajith007@gmail.com" },
+        { name: "Cathy Maria Noble", role: "Secretary", color: "from-logo-red to-logo-purple", image: "/assets/team/cathy.jpg", linkedin: "https://www.linkedin.com/in/cathy-noble-843111306", email: "cathynoble.info@gmail.com" },
+        { name: "Sreeram C", role: "Media Head", color: "from-logo-purple via-logo-pink to-logo-red", image: "/assets/team/sreeram.jpg", linkedin: "https://www.linkedin.com/in/sreeramchelat", email: "sreeramchelat@gmail.com" },
+        { name: "Advait Rathish", role: "Media", color: "from-logo-purple via-logo-pink to-logo-red", image: "/assets/team/advait.jpg", linkedin: "https://www.linkedin.com/in/advaitrathish", email: "advaitrathish@gmail.com" },
+        { name: "Adithyan S", role: "Webmaster", color: "from-logo-purple via-logo-pink to-logo-red", image: "/assets/team/adithyan.jpg", linkedin: "https://www.linkedin.com/in/adithyansunilkumar", email: "skradithyan@gmail.com" },
+        { name: "Abhinand Nandakumar", role: "Assistant Webmaster", color: "from-logo-red to-logo-purple", image: "/assets/team/abhinand.jpg", linkedin: "https://www.linkedin.com/in/abhinandakumar001", email: "abhinandakumar001@gmail.com" },
+        { name: "Akshara B", role: "Member", color: "from-logo-purple via-logo-pink to-logo-red", image: "/assets/team/akshara.jpg", linkedin: "https://www.linkedin.com/in/akshara-balakrishnan", email: "aksharabalakrishnan159@gmail.com" },
+        { name: "Rasitha C R", role: "Execom Member", color: "from-logo-red to-logo-pink", image: "/assets/team/rasitha.jpg", linkedin: "https://www.linkedin.com/in/rasitha-c-r-44a452320", email: "rasithakkd@gmail.com " },
+        { name: "Fyha Fathima", role: "Member", color: "from-logo-red to-logo-purple", image: "/assets/team/fyha.jpg", linkedin: "http://linkedin.com/in/fyha-fathima-78b674371", email: "fyhasnr@gmail.com" },
+        { name: "Adarsh V", role: "Member", color: "from-logo-pink to-logo-red", image: "/assets/team/adarsh.jpg", linkedin: "#", email: "adarshva209@gmail.com" },
+        { name: "Visal J", role: "Treasurer", color: "from-logo-purple to-logo-pink", image: "/assets/team/visal.jpg", linkedin: "https://www.linkedin.com/in/visal-techie", email: "visaljk07@gmail.com" },
+        { name: "Rohith Jayaprakash C", role: "Member", color: "from-logo-pink to-logo-purple", image: "/assets/team/rohith.jpg", linkedin: "#", email: "rohithjayaprakashc7549@gmail.com" },
     ];
 
     const getInitials = (name) => {
@@ -58,16 +62,33 @@ export default function TeamSection() {
                             {/* Interactive Avatar */}
                             <motion.div
                                 className={`relative size-32 rounded-3xl bg-linear-to-br ${member.color} p-1 shadow-xl`}
-                                variants={{
-                                    hover: { rotate: 6 }
-                                }}
-                                transition={{ type: "spring", stiffness: 300, damping: 15 }}
                             >
-                                <div className="flex h-full w-full items-center justify-center rounded-[calc(1.5rem-4px)] bg-white text-3xl font-black text-transparent bg-clip-text bg-linear-to-br from-gray-900 to-gray-600">
-                                    {getInitials(member.name)}
+                                <div className="relative h-full w-full overflow-hidden rounded-[calc(1.5rem-4px)] bg-white flex items-center justify-center">
+                                    {/* Placeholder Logo / User Icon */}
+                                    <div className="absolute inset-0 flex items-center justify-center bg-gray-50/50">
+                                        <User className="size-16 text-gray-300/50" />
+                                    </div>
+
+                                    {/* Initials (Overlay or Alternative) */}
+                                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/80 backdrop-blur-sm">
+                                        <span className="text-2xl font-black text-transparent bg-clip-text bg-linear-to-br from-gray-900 to-gray-600">
+                                            {getInitials(member.name)}
+                                        </span>
+                                    </div>
+
+                                    {/* Actual Profile Image */}
+                                    <img
+                                        src={member.image}
+                                        alt={member.name}
+                                        className="relative z-10 h-full w-full object-cover"
+                                        onError={(e) => {
+                                            e.target.style.display = 'none';
+                                        }}
+                                    />
                                 </div>
-                                <motion.div
-                                    className="absolute -bottom-3 -right-3 size-10 rounded-xl bg-white shadow-xl flex items-center justify-center text-logo-purple cursor-pointer"
+                                <motion.a
+                                    href={`mailto:${member.email}`}
+                                    className="absolute -bottom-3 -right-3 size-10 rounded-xl bg-white shadow-xl flex items-center justify-center text-logo-purple cursor-pointer z-20"
                                     variants={{
                                         hover: { scale: 1 }
                                     }}
@@ -76,7 +97,7 @@ export default function TeamSection() {
                                     transition={{ type: "spring", stiffness: 400, damping: 20 }}
                                 >
                                     <Mail size={16} />
-                                </motion.div>
+                                </motion.a>
                             </motion.div>
 
                             <div className="space-y-2 pt-2">
@@ -104,20 +125,14 @@ export default function TeamSection() {
 
                             <div className="flex items-center gap-6 pt-2">
                                 <motion.a
-                                    href="#"
+                                    href={member.linkedin}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="p-3 rounded-2xl bg-gray-50 text-gray-400"
                                     whileHover={{ scale: 1.1, backgroundColor: "#F3E8FF", color: "#7B2FF2" }}
                                     transition={{ type: "spring", stiffness: 400, damping: 15 }}
                                 >
                                     <LinkedinIcon className="size-5" />
-                                </motion.a>
-                                <motion.a
-                                    href="#"
-                                    className="p-3 rounded-2xl bg-gray-50 text-gray-400"
-                                    whileHover={{ scale: 1.1, backgroundColor: "#F3E8FF", color: "#7B2FF2" }}
-                                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                                >
-                                    <GithubIcon className="size-5" />
                                 </motion.a>
                             </div>
                         </motion.div>
