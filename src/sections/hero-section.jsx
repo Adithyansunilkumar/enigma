@@ -1,6 +1,6 @@
 // ENIGMA – Hero Section
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Cpu, Zap } from "lucide-react";
 import MagneticButton from "../components/animations/MagneticButton";
 import DotGridBackground from "../components/background/DotGridBackground";
 
@@ -74,18 +74,23 @@ export default function HeroSection() {
                     transition={{ delay: 0.5, duration: 0.8 }}
                 >
                     <div className="flex -space-x-3">
-                        {[1, 2, 3, 4].map((i) => (
-                            <div key={i} className={`size-10 md:size-12 rounded-full border-2 border-white bg-linear-to-br ${i % 2 === 0 ? 'from-logo-purple to-logo-pink' : 'from-logo-pink to-logo-red'} flex items-center justify-center text-[10px] md:text-xs font-bold text-white shadow-sm`}>
-                                {String.fromCharCode(64 + i)}
+                        {[
+                            { icon: <Cpu size={16} />, color: "from-logo-purple to-logo-pink" },
+                            { icon: <motion.div animate={{ rotate: 360 }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }}><code className="text-[10px] font-black tracking-tighter">&lt;/&gt;</code></motion.div>, color: "from-logo-pink to-logo-red" },
+                            { icon: <Zap size={16} />, color: "from-logo-purple to-logo-pink" },
+                            { icon: <div className="text-[10px] font-black tracking-tighter px-0.5">_</div>, color: "from-logo-pink to-logo-red" },
+                        ].map((item, i) => (
+                            <div key={i} className={`size-10 md:size-12 rounded-full border-2 border-white bg-linear-to-br ${item.color} flex items-center justify-center text-white shadow-sm`}>
+                                {item.icon}
                             </div>
                         ))}
                         <div className="size-10 md:size-12 rounded-full border-2 border-white bg-gray-900 flex items-center justify-center text-[10px] md:text-xs font-bold text-white shadow-sm">
-                            +200
+                            <ArrowRight size={14} className="rotate-[-45deg]" />
                         </div>
                     </div>
                     <p className="text-sm md:text-base text-gray-400 font-semibold tracking-wide flex items-center gap-2">
                         <span className="size-2 rounded-full bg-logo-red animate-pulse" />
-                        Joined by 200+ passionate tech leaders
+                        Driven by a community of student innovators
                     </p>
                 </motion.div>
             </section >

@@ -148,6 +148,7 @@ export default function ContactSection() {
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.3 }}
                                     whileHover="hover"
+                                    onClick={() => window.open("https://maps.app.goo.gl/NMvNrogouDgfrRRy9", "_blank")}
                                 >
                                     <motion.div
                                         className="size-16 rounded-[24px] bg-white shadow-sm border border-gray-100 flex items-center justify-center text-logo-red"
@@ -160,15 +161,19 @@ export default function ContactSection() {
                                     </motion.div>
                                     <div>
                                         <p className="text-[10px] text-gray-400 uppercase font-black tracking-[0.2em] mb-1">Locate Us</p>
-                                        <motion.p
+                                        <motion.a
+                                            href="https://maps.app.goo.gl/NMvNrogouDgfrRRy9"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             className="text-[#1A1A1B] text-xl font-black tracking-tight"
                                             variants={{
                                                 hover: { color: "var(--color-logo-red)" }
                                             }}
                                             transition={{ duration: 0.2 }}
+                                            onClick={(e) => e.stopPropagation()}
                                         >
                                             Computer Science Block, NCERC
-                                        </motion.p>
+                                      </motion.a>
                                     </div>
                                 </motion.div>
                             </div>

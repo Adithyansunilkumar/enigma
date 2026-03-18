@@ -1,8 +1,21 @@
 // ENIGMA – Footer
-import { GithubIcon, InstagramIcon, LinkedinIcon, ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { ArrowRight, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 
 export default function Footer() {
+    const [activeModal, setActiveModal] = useState(null); // 'privacy' or 'terms'
+
+    // Prevent scroll when modal is open
+    useEffect(() => {
+        if (activeModal) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => { document.body.style.overflow = 'unset'; };
+    }, [activeModal]);
+
     const quickLinks = [
         { name: 'Home', href: '#' },
         { name: 'About Us', href: '#about' },
@@ -11,6 +24,25 @@ export default function Footer() {
         { name: 'Contact', href: '#contact' },
     ];
 
+    const modalContent = {
+        privacy: {
+            title: "Privacy Policy",
+            content: [
+                "ENIGMA is committed to protecting your privacy. We only collect the information you voluntarily provide through our contact forms, such as your name and email address, to better serve your inquiries.",
+                "We do not sell, trade, or otherwise transfer your personal information to outside parties. Your data is used strictly for internal communication and association updates.",
+                "By using our website, you consent to our simple privacy approach designed to keep your information safe and secure."
+            ]
+        },
+        terms: {
+            title: "Terms of Service",
+            content: [
+                "Welcome to the official ENIGMA association website. By accessing this site, you agree to follow our basic usage guidelines.",
+                "All content, including text, images, and designs, is the property of ENIGMA CSE Association and is intended for personal, non-commercial use only.",
+                "We strive for accuracy but are not liable for any temporary misinformation or technical issues. We reserve the right to update our services and events as needed."
+            ]
+        }
+    };
+
     return (
         <motion.footer className="flex flex-col items-center px-6 md:px-16 lg:px-24 justify-center w-full pt-20 mt-32 bg-white border-t border-gray-100 pb-12"
             initial={{ opacity: 0, y: 20 }}
@@ -18,6 +50,52 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
         >
+            {/* Modal Overlay */}
+            <AnimatePresence>
+                {activeModal && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setActiveModal(null)}
+                            className="absolute inset-0 bg-black/40 backdrop-blur-md"
+                        />
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.95, opacity: 0, y: 10 }}
+                            className="relative w-full max-w-lg bg-white rounded-[32px] p-8 md:p-10 shadow-2xl overflow-hidden border border-white/20"
+                        >
+                            <div className="flex justify-between items-center mb-8">
+                                <h3 className="text-2xl font-black text-[#1A1A1B]">{modalContent[activeModal].title}</h3>
+                                <button
+                                    onClick={() => setActiveModal(null)}
+                                    className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                                >
+                                    <X size={20} className="text-gray-400" />
+                                </button>
+                            </div>
+                            <div className="space-y-6">
+                                {modalContent[activeModal].content.map((p, i) => (
+                                    <p key={i} className="text-gray-500 text-sm font-medium leading-relaxed">
+                                        {p}
+                                    </p>
+                                ))}
+                            </div>
+                            <div className="mt-10">
+                                <button
+                                    onClick={() => setActiveModal(null)}
+                                    className="w-full py-4 rounded-2xl bg-logo-purple text-white font-black text-xs uppercase tracking-widest hover:brightness-110 active:scale-[0.98] transition-all"
+                                >
+                                    I Understand
+                                </button>
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
+
             {/* Top area: Logo + Desc + Quick Links */}
             <div className="w-full max-w-7xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8 pb-16">
                 {/* Left: Logo + description */}
@@ -30,26 +108,7 @@ export default function Footer() {
                     <p className="text-gray-500 text-base leading-relaxed max-w-xs font-medium">
                         Encoding Tomorrow. We are dedicated to building a community of passionate technocrats, developers, and innovators.
                     </p>
-                    {/* Social icons */}
-                    <div className="flex items-center gap-4 pt-2">
-                        {[
-                            { icon: LinkedinIcon, href: "#" },
-                            { icon: InstagramIcon, href: "#" },
-                            { icon: GithubIcon, href: "#" }
-                        ].map((social, i) => (
-                            <motion.a
-                                key={i}
-                                href={social.href}
-                                className="size-11 rounded-xl bg-gray-50 flex items-center justify-center text-gray-400 hover:text-purple-600 hover:bg-purple-100 hover:-translate-y-1 transition-all duration-300 shadow-sm"
-                                initial={{ opacity: 0, y: 10 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                            >
-                                <social.icon className="size-5" />
-                            </motion.a>
-                        ))}
-                    </div>
+
                 </div>
 
                 {/* Quick Links */}
@@ -79,16 +138,19 @@ export default function Footer() {
                     <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-[#1A1A1B]">Support</h4>
                     <ul className="space-y-4">
                         {[
-                            { name: "Technical Suggestions", href: "#contact" },
-                            { name: "Report an Issue", href: "#contact" },
-                            { name: "Terms of Service", href: "#" },
-                            { name: "Privacy Policy", href: "#" }
+                            { name: "Technical Suggestions", href: "#contact", type: 'link' },
+                            { name: "Report an Issue", href: "#contact", type: 'link' },
+                            { name: "Terms of Service", href: "#", type: 'terms' },
+                            { name: "Privacy Policy", href: "#", type: 'privacy' }
                         ].map((link, index) => (
                             <li key={index}>
-                                <a href={link.href} className="text-gray-500 text-sm font-bold hover:text-purple-600 transition-colors flex items-center gap-2 group">
+                                <button
+                                    onClick={() => link.type === 'link' ? window.location.hash = link.href : setActiveModal(link.type)}
+                                    className="text-gray-500 text-sm font-bold hover:text-purple-600 transition-colors flex items-center gap-2 group cursor-pointer"
+                                >
                                     <span className="size-1 rounded-full bg-purple-200 group-hover:bg-purple-600 transition-colors" />
                                     {link.name}
-                                </a>
+                                </button>
                             </li>
                         ))}
                     </ul>
