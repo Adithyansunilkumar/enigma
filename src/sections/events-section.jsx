@@ -1,7 +1,7 @@
 // ENIGMA – Events & Workshops Section
 import SectionTitle from "../components/section-title";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { XIcon, ChevronLeft, ChevronRight, Calendar, ArrowRight, Share2, MapPin, Clock, User } from "lucide-react";
 import MagneticButton from "../components/animations/MagneticButton";
 import { useIsMobile } from "../hooks/useIsMobile";
@@ -198,98 +198,12 @@ export default function EventsSection() {
          <div className="mt-16 md:mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 w-full max-w-7xl px-6">
             <AnimatePresence mode="popLayout">
                {visibleItems.map((event, index) => (
-                  <motion.div
+                  <EventCard
                      key={event.title + index}
-                     className="group relative flex flex-col rounded-[40px] bg-white border border-gray-100 shadow-sm overflow-hidden will-change-transform"
-                     initial={{ y: 30, opacity: 0, scale: 0.95 }}
-                     whileInView={{ y: 0, opacity: 1, scale: 1 }}
-                     viewport={{ once: true, margin: "-50px" }}
-                     exit={{ y: 20, opacity: 0, scale: 0.95 }}
-                     whileHover="hover"
-                     variants={{
-                        hover: {
-                           y: -10,
-                           boxShadow: "0 40px 80px -20px rgba(156, 82, 241, 0.15)"
-                        }
-                     }}
-                     transition={{
-                        delay: (index % 3) * 0.1,
-                        duration: 0.5,
-                        ease: "easeOut"
-                     }}
-                  >
-                     {/* Image Container */}
-                     <div className="relative h-64 sm:h-72 overflow-hidden">
-                        <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/40 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <motion.img
-                           src={event.images[0]}
-                           alt={event.title}
-                           loading="lazy"
-                           className="w-full h-full object-cover"
-                           variants={{
-                              hover: { scale: 1.1 }
-                           }}
-                           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                        />
-                     </div>
-
-                     {/* Content */}
-                     <div className="p-8 sm:p-10 flex flex-col flex-1 relative z-20">
-                        <div className="flex flex-wrap items-center gap-3 mb-6">
-                           <span className="px-3 py-1 rounded-full bg-logo-purple/10 text-logo-purple text-[10px] font-black uppercase tracking-widest border border-logo-purple/10">
-                              {event.category}
-                           </span>
-                           {event.upcoming && (
-                              <span className="px-4 py-1 rounded-full bg-logo-pink/10 text-logo-pink text-[10px] font-black uppercase tracking-widest border border-logo-pink/10 flex items-center gap-2">
-                                 <span className="size-1.5 rounded-full bg-logo-pink animate-pulse" />
-                                 Upcoming
-                              </span>
-                           )}
-                        </div>
-
-                        <h3 className="text-2xl font-black text-[#1A1A1B] leading-tight mb-4 group-hover:text-logo-purple transition-colors tracking-tight">
-                           {event.title}
-                        </h3>
-
-                        <div className="flex items-center gap-2 text-gray-400 text-xs font-bold mb-6 uppercase tracking-widest">
-                           <Calendar size={14} className="text-logo-pink" />
-                           <span>{event.date}</span>
-                        </div>
-
-                        <p className="text-gray-500 text-sm sm:text-base leading-relaxed line-clamp-2 mb-8 font-medium">
-                           {event.description}
-                        </p>
-
-                        <div className="mt-auto">
-                           <MagneticButton>
-                              <motion.button
-                                 onClick={() => openModal(event)}
-                                 className="group/btn flex items-center justify-center gap-3 w-full py-5 rounded-[24px] bg-gray-50 text-[#1A1A1B] font-black text-[10px] uppercase tracking-widest border border-gray-100 active:scale-95"
-                                 whileHover="hover"
-                                 variants={{
-                                    hover: {
-                                       backgroundColor: "#F5F3FF",
-                                       borderColor: "#DDD6FE",
-                                       color: "#9c52f1",
-                                       boxShadow: "0 10px 25px -5px rgba(156, 82, 241, 0.2)"
-                                    }
-                                 }}
-                                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                              >
-                                 Explore Event
-                                 <motion.div
-                                    variants={{
-                                       hover: { x: 5 }
-                                    }}
-                                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                                 >
-                                    <ArrowRight size={16} />
-                                 </motion.div>
-                              </motion.button>
-                           </MagneticButton>
-                        </div>
-                     </div>
-                  </motion.div>
+                     event={event}
+                     index={index}
+                     onOpen={() => openModal(event)}
+                  />
                ))}
             </AnimatePresence>
          </div>
@@ -460,5 +374,133 @@ export default function EventsSection() {
             )}
          </AnimatePresence>
       </section>
+   );
+}
+
+function EventCard({ event, index, onOpen }) {
+   const [isHovered, setIsHovered] = useState(false);
+   const [currentIdx, setCurrentIdx] = useState(0);
+
+   useEffect(() => {
+      let interval;
+      if (isHovered && event.images.length > 1) {
+         interval = setInterval(() => {
+            setCurrentIdx((prev) => (prev + 1) % event.images.length);
+         }, 1500);
+      } else {
+         setCurrentIdx(0);
+      }
+      return () => clearInterval(interval);
+   }, [isHovered, event.images.length]);
+
+   return (
+      <motion.div
+         className="group relative flex flex-col rounded-[40px] bg-white border border-gray-100 shadow-sm overflow-hidden will-change-transform"
+         initial={{ y: 30, opacity: 0, scale: 0.95 }}
+         whileInView={{ y: 0, opacity: 1, scale: 1 }}
+         viewport={{ once: true, margin: "-50px" }}
+         exit={{ y: 20, opacity: 0, scale: 0.95 }}
+         onMouseEnter={() => setIsHovered(true)}
+         onMouseLeave={() => setIsHovered(false)}
+         whileHover="hover"
+         variants={{
+            hover: {
+               y: -10,
+               boxShadow: "0 40px 80px -20px rgba(156, 82, 241, 0.15)"
+            }
+         }}
+         transition={{
+            delay: (index % 3) * 0.1,
+            duration: 0.5,
+            ease: "easeOut"
+         }}
+      >
+         {/* Image Container */}
+         <div className="relative h-64 sm:h-72 overflow-hidden">
+            <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/40 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <AnimatePresence initial={false}>
+               <motion.img
+                  key={currentIdx}
+                  src={event.images[currentIdx]}
+                  alt={event.title}
+                  loading="lazy"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  transition={{ duration: 0.6 }}
+               />
+            </AnimatePresence>
+
+            {/* Pagination dots for cards with multiple images */}
+            {event.images.length > 1 && isHovered && (
+               <div className="absolute bottom-4 left-0 right-0 z-20 flex justify-center gap-1.5 px-4">
+                  {event.images.map((_, i) => (
+                     <div
+                        key={i}
+                        className={`h-1 rounded-full transition-all duration-300 ${i === currentIdx ? "w-4 bg-white" : "w-1 bg-white/40"}`}
+                     />
+                  ))}
+               </div>
+            )}
+         </div>
+
+         {/* Content */}
+         <div className="p-8 sm:p-10 flex flex-col flex-1 relative z-20">
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+               <span className="px-3 py-1 rounded-full bg-logo-purple/10 text-logo-purple text-[10px] font-black uppercase tracking-widest border border-logo-purple/10">
+                  {event.category}
+               </span>
+               {event.upcoming && (
+                  <span className="px-4 py-1 rounded-full bg-logo-pink/10 text-logo-pink text-[10px] font-black uppercase tracking-widest border border-logo-pink/10 flex items-center gap-2">
+                     <span className="size-1.5 rounded-full bg-logo-pink animate-pulse" />
+                     Upcoming
+                  </span>
+               )}
+            </div>
+
+            <h3 className="text-2xl font-black text-[#1A1A1B] leading-tight mb-4 group-hover:text-logo-purple transition-colors tracking-tight">
+               {event.title}
+            </h3>
+
+            <div className="flex items-center gap-2 text-gray-400 text-xs font-bold mb-6 uppercase tracking-widest">
+               <Calendar size={14} className="text-logo-pink" />
+               <span>{event.date}</span>
+            </div>
+
+            <p className="text-gray-500 text-sm sm:text-base leading-relaxed line-clamp-2 mb-8 font-medium">
+               {event.description}
+            </p>
+
+            <div className="mt-auto">
+               <MagneticButton>
+                  <motion.button
+                     onClick={onOpen}
+                     className="group/btn flex items-center justify-center gap-3 w-full py-5 rounded-[24px] bg-gray-50 text-[#1A1A1B] font-black text-[10px] uppercase tracking-widest border border-gray-100 active:scale-95"
+                     whileHover="hover"
+                     variants={{
+                        hover: {
+                           backgroundColor: "#F5F3FF",
+                           borderColor: "#DDD6FE",
+                           color: "#9c52f1",
+                           boxShadow: "0 10px 25px -5px rgba(156, 82, 241, 0.2)"
+                        }
+                     }}
+                     transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  >
+                     Explore Event
+                     <motion.div
+                        variants={{
+                           hover: { x: 5 }
+                        }}
+                        transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                     >
+                        <ArrowRight size={16} />
+                     </motion.div>
+                  </motion.button>
+               </MagneticButton>
+            </div>
+         </div>
+      </motion.div>
    );
 }
