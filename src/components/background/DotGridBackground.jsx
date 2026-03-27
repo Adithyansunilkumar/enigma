@@ -55,7 +55,7 @@ const DotGridBackground = ({
         } else {
             return { dotSize: 2, gap: 22, proximity: 120, shockStrength: 3 };
         }
-    }, [isDesktop, isTablet, windowSize.width]);
+    }, [isDesktop, isTablet]);
 
     // Component props based on user request performance constraints
     const props = useMemo(() => ({
@@ -156,7 +156,11 @@ const DotGridBackground = ({
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
             if (!ctx) return;
+            
+            ctx.save();
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.restore();
 
             const { x: px, y: py } = pointerRef.current;
 
@@ -225,9 +229,6 @@ const DotGridBackground = ({
                 if (speed > props.speedTrigger && dist < props.proximity && !dot._active) {
                     dot._active = true;
                     gsap.killTweensOf(dot);
-
-                    const pushX = (dot.cx - pr.x) + (vx * 0.005);
-                    const pushY = (dot.cy - pr.y) + (vy * 0.005);
 
                     gsap.to(dot, {
                         inertia: {
