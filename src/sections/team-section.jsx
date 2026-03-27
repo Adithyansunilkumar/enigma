@@ -13,6 +13,8 @@ export default function TeamSection() {
     const [showAll, setShowAll] = useState(false);
 
     const members = [
+        { name: "Dr. Ramani K", role: "HOD of CSE", color: "from-logo-pink to-logo-red", image: "/assets/team/dr-ramani.jpg", linkedin: "#", email: "[EMAIL_ADDRESS]" },
+        { name: "Betsy Joy", role: "Association Incharge", color: "from-logo-pink to-logo-red", image: "/assets/team/betsy.jpg", linkedin: "#", email: "betsy3942@ncerc.ac.in" },
         { name: "Alokh K", role: "Vice President", color: "from-logo-pink to-logo-red", image: "/assets/team/alokh.jpg", linkedin: "https://www.linkedin.com/in/alokh-k", email: "alokhajith007@gmail.com" },
         { name: "Cathy Maria Noble", role: "Secretary", color: "from-logo-red to-logo-purple", image: "/assets/team/cathy.jpg", linkedin: "https://www.linkedin.com/in/cathy-noble-843111306", email: "cathynoble.info@gmail.com" },
         { name: "Sreeram C", role: "Media Head", color: "from-logo-purple via-logo-pink to-logo-red", image: "/assets/team/sreeram.jpg", linkedin: "https://www.linkedin.com/in/sreeramchelat", email: "sreeramchelat@gmail.com" },
