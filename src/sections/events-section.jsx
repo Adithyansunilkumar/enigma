@@ -19,10 +19,10 @@ export default function EventsSection() {
          location: "Main Auditorium, Campus North",
          upcoming: false,
          images: [
-            "/assets/events/inauguration/inauguration.jpg",
-            "/assets/events/inauguration/inauguration1.jpg",
-            "/assets/events/inauguration/inauguration2.jpg",
-            "/assets/events/inauguration/inauguration3.jpg",
+            "/assets/events/inauguration/inauguration-1.jpg",
+            "/assets/events/inauguration/inauguration-2.jpg",
+            "/assets/events/inauguration/inauguration-3.jpg",
+            "/assets/events/inauguration/inauguration-4.jpg",
          ],
          description:
             "The grand inauguration of ENIGMA, the CSE Students Association of NCERC, marks the start of our activities, featuring guest lectures, our annual roadmap, and a vision for innovation.",
@@ -42,7 +42,13 @@ export default function EventsSection() {
          upcoming: false,
          date: "August 5, 2025",
          location: "Aryabhatta Seminar Hall-510",
-         images: ["/assets/events/hardware-workshop/hardware-workshop.jpg"],
+         images: [
+            "/assets/events/hardware-workshop/hardware-workshop-1.jpg",
+            "/assets/events/hardware-workshop/hardware-workshop-2.jpg",
+            "/assets/events/hardware-workshop/hardware-workshop-3.jpg",
+            "/assets/events/hardware-workshop/hardware-workshop-4.jpg",
+            "/assets/events/hardware-workshop/hardware-workshop-5.jpg",
+         ],
          description:
             "A hands-on workshop to explore the basics of computer hardware with expert guidance. Includes dismantling and reassembling systems to understand component functionality.",
       },
@@ -52,7 +58,10 @@ export default function EventsSection() {
          upcoming: false,
          date: "August 11 2025",
          location: "Advanced Computing Lab 226",
-         images: ["/assets/events/computer-networks/computer-networks.jpg"],
+         images: [
+            "/assets/events/computer-networks/computer-networks-1.jpg",
+            "/assets/events/computer-networks/computer-networks-2.jpg"
+         ],
          description:
             "A 2-Day Workshop on Computer Networks: LAN Implementation. Dive into local area networks, gain hands-on experience in configuring and troubleshooting devices.",
       },
@@ -72,7 +81,12 @@ export default function EventsSection() {
          upcoming: false,
          date: "January 22 2026",
          location: "Advanced Computing Lab 226",
-         images: ["/assets/events/web-dev/web-dev.jpg"],
+         images: [
+            "/assets/events/web-dev/web-dev-1.jpg",
+            "/assets/events/web-dev/web-dev-2.jpg",
+            "/assets/events/web-dev/web-dev-3.jpg",
+            "/assets/events/web-dev/web-dev-4.jpg"
+         ],
          description:
             "An intensive workshop on building and hosting your first website, covering HTML, CSS, and modern hosting solutions.",
       }
