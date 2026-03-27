@@ -2,7 +2,7 @@
 import SectionTitle from "../components/section-title";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { XIcon, ChevronLeft, ChevronRight, Calendar, ArrowRight, Share2, MapPin } from "lucide-react";
+import { XIcon, ChevronLeft, ChevronRight, Calendar, ArrowRight, Share2, MapPin, Clock, User } from "lucide-react";
 import MagneticButton from "../components/animations/MagneticButton";
 import { useIsMobile } from "../hooks/useIsMobile";
 
@@ -89,8 +89,45 @@ export default function EventsSection() {
          ],
          description:
             "An intensive workshop on building and hosting your first website, covering HTML, CSS, and modern hosting solutions.",
+      },
+      {
+         title: "INDUSTRIAL VISIT: BRIDGEON",
+         category: "Industrial Visit",
+         upcoming: false,
+         date: "February 19, 2026",
+         location: "Bridgeon, Kochi",
+         images: [
+            "/assets/industrial-visits/bridgeon/bridgeon-1.jpg",
+            "/assets/industrial-visits/bridgeon/bridgeon-2.jpg"
+         ],
+         description:
+            "A visit to Bridgeon to understand the industry workflows and the latest trends in software development and placement training.",
+      },
+      {
+         title: "INDUSTRIAL VISIT: KINFRA",
+         category: "Industrial Visit",
+         upcoming: false,
+         date: "February 14, 2026",
+         location: "Kinfra Techno Industrial Park, Kakkanchery, Malappuram",
+         images: ["/assets/industrial-visits/kinfra/kinfra.jpg"],
+         description:
+            "Exploring the infrastructure and technological ecosystem at Kinfra Techno Industrial Park to bridge the gap between academia and industry.",
+      },
+      {
+         title: "GENERAL PTA-MEETING & AWARENESS SESSION",
+         category: "Special Event",
+         upcoming: false,
+         date: "February 07, 2026",
+         time: "11:00 AM",
+         location: "Aryabhatta Seminar Hall, NCERC",
+         speaker: "Shri. Arumughan V (ASI of Police)",
+         images: ["/assets/events/pta-awareness-session/pta-awareness-session.jpg"],
+         description:
+            "A comprehensive PTA meeting and awareness session for parents of CSE and AI&ML (S4, S6, S8) students. The session features a special talk on 'Perception on Anti-Drugs and Anti-Ragging' by Shri. Arumughan V, Janamaithri Asst. District Nodal Officer, Palakkad.",
       }
    ];
+
+   const sortedItems = [...items].sort((a, b) => new Date(a.date) - new Date(b.date));
 
    const openModal = (event) => {
       setSelectedEvent(event);
@@ -149,7 +186,7 @@ export default function EventsSection() {
    };
 
    const [showAll, setShowAll] = useState(false);
-   const visibleItems = showAll ? items : items.slice(0, isMobile ? 3 : 6);
+   const visibleItems = showAll ? sortedItems : sortedItems.slice(0, isMobile ? 3 : 6);
 
    return (
       <section className="py-24 md:py-32 flex flex-col items-center bg-[#FDFDFF]/50" id="events">
@@ -257,7 +294,7 @@ export default function EventsSection() {
             </AnimatePresence>
          </div>
 
-         {items.length > (isMobile ? 3 : 6) && (
+         {sortedItems.length > (isMobile ? 3 : 6) && (
             <motion.div
                className="mt-20"
                initial={{ opacity: 0 }}
@@ -373,10 +410,22 @@ export default function EventsSection() {
                                  <Calendar size={16} className="text-logo-pink" />
                                  <span>{selectedEvent.date}</span>
                               </div>
+                              {selectedEvent.time && (
+                                 <div className="flex items-center gap-3 text-gray-500 font-bold text-sm">
+                                    <Clock size={16} className="text-logo-pink" />
+                                    <span>{selectedEvent.time}</span>
+                                 </div>
+                              )}
                               <div className="flex items-center gap-3 text-gray-500 font-bold text-sm">
                                  <MapPin size={16} className="text-logo-pink" />
                                  <span>{selectedEvent.location || "NCERC Campus"}</span>
                               </div>
+                              {selectedEvent.speaker && (
+                                 <div className="flex items-center gap-3 text-gray-500 font-bold text-sm">
+                                    <User size={16} className="text-logo-pink" />
+                                    <span>{selectedEvent.speaker}</span>
+                                 </div>
+                              )}
                            </div>
                         </div>
 
