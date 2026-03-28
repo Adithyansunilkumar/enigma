@@ -216,20 +216,24 @@ export default function EventsSection() {
                viewport={{ once: true }}
                transition={{ delay: 0.5 }}
             >
-               <button
-                  onClick={() => setShowAll(!showAll)}
-                  className="flex items-center gap-3 px-10 py-5 rounded-full glass font-black text-xs uppercase tracking-widest text-[#1A1A1B] hover:bg-[#1A1A1B] hover:text-white transition-all active:scale-95 shadow-lg"
-               >
-                  {showAll ? (
-                     <>
-                        Show Less <ArrowRight size={16} className="-rotate-90 transition-transform" />
-                     </>
-                  ) : (
-                     <>
-                        View All Events <ArrowRight size={16} className="transition-transform" />
-                     </>
-                  )}
-               </button>
+               <MagneticButton>
+                  <motion.button
+                     onClick={() => setShowAll(!showAll)}
+                     className="group/view-all flex items-center gap-4 px-12 py-6 rounded-3xl bg-white border border-gray-100 shadow-sm text-[#1A1A1B] font-black text-xs uppercase tracking-[0.2em] transition-all hover:border-logo-pink/30 hover:shadow-xl hover:shadow-logo-pink/10 active:scale-95"
+                  >
+                     <span className="relative z-10 flex items-center gap-3">
+                        {showAll ? (
+                           <>
+                              Collapse All <ArrowRight size={18} className="-rotate-90 group-hover/view-all:translate-y--0.5 transition-transform" />
+                           </>
+                        ) : (
+                           <>
+                              View All Workshops & Events <ArrowRight size={18} className="group-hover/view-all:translate-x-1.5 transition-transform text-logo-pink" />
+                           </>
+                        )}
+                     </span>
+                  </motion.button>
+               </MagneticButton>
             </motion.div>
          )}
 

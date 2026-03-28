@@ -22,6 +22,7 @@ export default function TeamSection() {
         { name: "Adithyan S", role: "Webmaster", color: "from-logo-purple via-logo-pink to-logo-red", image: "/assets/team/adithyan.jpg", linkedin: "https://www.linkedin.com/in/adithyansunilkumar", email: "skradithyan@gmail.com" },
         { name: "Abhinand Nandakumar", role: "Assistant Webmaster", color: "from-logo-red to-logo-purple", image: "/assets/team/abhinand.jpg", linkedin: "https://www.linkedin.com/in/abhinandakumar001", email: "abhinandakumar001@gmail.com" },
         { name: "Akshara B", role: "Execom Member", color: "from-logo-purple via-logo-pink to-logo-red", image: "/assets/team/akshara.jpg", linkedin: "https://www.linkedin.com/in/akshara-balakrishnan", email: "aksharabalakrishnan159@gmail.com" },
+        { name: "Ajay p", role: "Execom Member", color: "from-logo-red to-logo-purple", image: "/assets/team/ajay.jpg", linkedin: "https://www.linkedin.com/in/ajay-p-ab1515251", email: "ajaypradeep5273@gmail.com" },
         { name: "Rasitha C R", role: "Execom Member", color: "from-logo-red to-logo-pink", image: "/assets/team/rasitha.jpg", linkedin: "https://www.linkedin.com/in/rasitha-c-r-44a452320", email: "rasithakkd@gmail.com " },
         { name: "Fyha Fathima", role: "Execom Member", color: "from-logo-red to-logo-purple", image: "", linkedin: "http://linkedin.com/in/fyha-fathima-78b674371", email: "fyhasnr@gmail.com" },
         { name: "Adarsh V", role: "Execom Member", color: "from-logo-pink to-logo-red", image: "", linkedin: "#", email: "adarshva209@gmail.com" },
