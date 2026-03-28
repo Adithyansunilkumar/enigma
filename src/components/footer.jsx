@@ -20,6 +20,7 @@ export default function Footer() {
         { name: 'Home', href: '#' },
         { name: 'About Us', href: '#about' },
         { name: 'Events & Workshops', href: '#events' },
+        { name: 'NSITE Projects', href: '#nsite-projects' },
         { name: 'Meet The Team', href: '#team' },
         { name: 'Contact', href: '#contact' },
     ];

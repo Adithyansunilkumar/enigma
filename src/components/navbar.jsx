@@ -10,6 +10,7 @@ export default function Navbar() {
     const links = [
         { name: 'About', href: '#about' },
         { name: 'Events', href: '#events' },
+        { name: 'NSITE Projects', href: '#nsite-projects' },
         { name: 'Team', href: '#team' },
     ];
 

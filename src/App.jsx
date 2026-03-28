@@ -8,6 +8,7 @@ import HeroSection from "./sections/hero-section";
 const AboutSection = lazy(() => import("./sections/about-section"));
 const EventsSection = lazy(() => import("./sections/events-section"));
 const TeamSection = lazy(() => import("./sections/team-section"));
+const NsiteProjectsSection = lazy(() => import("./sections/nsite-projects-section"));
 const ContactSection = lazy(() => import("./sections/contact-section"));
 
 import { useIsMobile } from "./hooks/useIsMobile";
@@ -39,6 +40,7 @@ export default function App() {
                 <Suspense fallback={<div className="h-screen bg-[#FDFDFF]" />}>
                     <AboutSection />
                     <EventsSection />
+                    <NsiteProjectsSection />
                     <TeamSection />
                     <ContactSection />
                 </Suspense>
