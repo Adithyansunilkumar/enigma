@@ -1,7 +1,7 @@
 import SectionTitle from "../components/section-title";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
-import { LinkedinIcon, Mail, ChevronDown, ChevronUp, User, ArrowRight } from "lucide-react";
+import { LinkedinIcon, Mail, User, ArrowRight } from "lucide-react";
 import MagneticButton from "../components/animations/MagneticButton";
 
 export default function TeamSection() {
@@ -25,6 +25,8 @@ export default function TeamSection() {
         { name: "Ajay p", role: "Execom Member", color: "from-logo-red to-logo-purple", image: "/assets/team/ajay.jpg", linkedin: "https://www.linkedin.com/in/ajay-p-ab1515251", email: "ajaypradeep5273@gmail.com" },
         { name: "Rasitha C R", role: "Execom Member", color: "from-logo-red to-logo-pink", image: "/assets/team/rasitha.jpg", linkedin: "https://www.linkedin.com/in/rasitha-c-r-44a452320", email: "rasithakkd@gmail.com " },
         { name: "Fyha Fathima", role: "Execom Member", color: "from-logo-red to-logo-purple", image: "", linkedin: "http://linkedin.com/in/fyha-fathima-78b674371", email: "fyhasnr@gmail.com" },
+        { name: "Uthara K P", role: "Execom Member", color: "from-logo-red to-logo-purple", image: "", linkedin: "#", email: "[EMAIL_ADDRESS]" },
+        { name: "Sradha S", role: "Execom Member", color: "from-logo-red to-logo-purple", image: "", linkedin: "#", email: "" },
         { name: "Adarsh V", role: "Execom Member", color: "from-logo-pink to-logo-red", image: "", linkedin: "#", email: "adarshva209@gmail.com" },
         { name: "Visal J", role: "Treasurer", color: "from-logo-purple to-logo-pink", image: "", linkedin: "https://www.linkedin.com/in/visal-techie", email: "visaljk07@gmail.com" },
         { name: "Rohith Jayaprakash C", role: "Execom Member", color: "from-logo-pink to-logo-purple", image: "", linkedin: "#", email: "rohithjayaprakashc7549@gmail.com" },
@@ -161,29 +163,32 @@ export default function TeamSection() {
             </div>
 
             {/* View All Button - Hidden on mobile as carousel handles all members */}
-            <div className="mt-12 hidden md:block">
+            <motion.div
+                className="mt-12 hidden md:block"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 }}
+            >
                 <MagneticButton>
                     <motion.button
                         onClick={() => setShowAll(!showAll)}
-                        className="group flex items-center gap-3 px-10 py-5 rounded-full bg-[#1A1A1B] text-white font-black text-xs uppercase tracking-widest shadow-2xl shadow-black/10 active:scale-95 transition-all"
-                        whileHover={{
-                            backgroundColor: "#2E2E2F",
-                            boxShadow: "0 20px 40px -10px rgba(156, 82, 241, 0.3)"
-                        }}
-                        transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                        className="group/view-all flex items-center gap-4 px-12 py-6 rounded-3xl bg-white border border-gray-100 shadow-sm text-[#1A1A1B] font-black text-xs uppercase tracking-[0.2em] transition-all hover:border-logo-pink/30 hover:shadow-xl hover:shadow-logo-pink/10 active:scale-95"
                     >
-                        {showAll ? (
-                            <>
-                                Show Less <ChevronUp className="size-5" />
-                            </>
-                        ) : (
-                            <>
-                                View All Members <ChevronDown className="size-5" />
-                            </>
-                        )}
+                        <span className="relative z-10 flex items-center gap-3">
+                            {showAll ? (
+                                <>
+                                    Collapse All <ArrowRight size={18} className="-rotate-90 group-hover/view-all:translate-y--0.5 transition-transform" />
+                                </>
+                            ) : (
+                                <>
+                                    View All Members <ArrowRight size={18} className="group-hover/view-all:translate-x-1.5 transition-transform text-logo-pink" />
+                                </>
+                            )}
+                        </span>
                     </motion.button>
                 </MagneticButton>
-            </div>
+            </motion.div>
 
             {/* Modern Scroll Progress Bar (Mobile Only) */}
             <div className="md:hidden flex flex-col items-center gap-4 mt-8 opacity-60">
