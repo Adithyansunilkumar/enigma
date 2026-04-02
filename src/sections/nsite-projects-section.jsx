@@ -30,6 +30,22 @@ export default function NsiteProjectsSection() {
             tags: ["MongoDB", "Express", "React", "Node.js"],
             github: "https://github.com/Adithyansunilkumar/skillo",
             demo: "https://skillo.vercel.app"
+        },
+        {
+            title: "Ai Outfit Analysis",
+            image: "/assets/nsite-projects/ai-outfit-analysis.jpg",
+            description: "A smart AI-powered web tool that analyzes your outfit through your camera and gives instant style feedback with a score — all offline and privacy-friendly.",
+            tags: ["JavaScript", "MediaDevices API", "Canvas API"],
+            github: "https://github.com/sreeniranjan10ks-max/aioutfitanalysis",
+            demo: "https://sreeniranjan10ks-max.github.io/aioutfitanalysis"
+        },
+        {
+            title: "Face Swap",
+            image: "/assets/nsite-projects/face-swap.jpg",
+            description: "A real-time face swapping application that utilizes advanced facial recognition to swap faces in real-time.",
+            tags: ["Face-api.js", "HTML5", "Tailwind CSS", "JavaScript"],
+            github: "https://github.com/aswathisuresh451-del/Face-swap",
+            demo: "https://aswathisuresh451-del.github.io/Face-swap/"
         }
     ];
 
