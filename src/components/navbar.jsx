@@ -3,16 +3,16 @@ import { MenuIcon, XIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 
+const links = [
+    { name: 'About', href: '#about' },
+    { name: 'Events', href: '#events' },
+    { name: 'NSITE Projects', href: '#nsite-projects' },
+    { name: 'Team', href: '#team' },
+];
+
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
-
-    const links = [
-        { name: 'About', href: '#about' },
-        { name: 'Events', href: '#events' },
-        { name: 'NSITE Projects', href: '#nsite-projects' },
-        { name: 'Team', href: '#team' },
-    ];
 
     useEffect(() => {
         const handleScroll = () => {

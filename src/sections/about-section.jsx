@@ -3,30 +3,31 @@ import SectionTitle from "../components/section-title";
 import { Target, Eye, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 
+const cards = [
+    {
+        icon: Target,
+        title: "Mission",
+        text: "Empowering CS students through hands-on technical workshops, hackathons, and real-world project development.",
+        color: "text-logo-purple",
+        bg: "bg-logo-purple/10"
+    },
+    {
+        icon: Eye,
+        title: "Vision",
+        text: "To bridge the gap between academic learning and industry demands, fostering a culture of innovation and excellence.",
+        color: "text-logo-pink",
+        bg: "bg-logo-pink/10"
+    },
+    {
+        icon: Sparkles,
+        title: "Values",
+        text: "Collaboration, integrity, and a relentless passion for technology that drives meaningful community impact.",
+        color: "text-logo-red",
+        bg: "bg-logo-red/10"
+    }
+];
+
 export default function AboutSection() {
-    const cards = [
-        {
-            icon: Target,
-            title: "Mission",
-            text: "Empowering CS students through hands-on technical workshops, hackathons, and real-world project development.",
-            color: "text-logo-purple",
-            bg: "bg-logo-purple/10"
-        },
-        {
-            icon: Eye,
-            title: "Vision",
-            text: "To bridge the gap between academic learning and industry demands, fostering a culture of innovation and excellence.",
-            color: "text-logo-pink",
-            bg: "bg-logo-pink/10"
-        },
-        {
-            icon: Sparkles,
-            title: "Values",
-            text: "Collaboration, integrity, and a relentless passion for technology that drives meaningful community impact.",
-            color: "text-logo-red",
-            bg: "bg-logo-red/10"
-        }
-    ];
 
     return (
         <section className="py-24 md:py-32 flex flex-col items-center overflow-hidden" id="about">

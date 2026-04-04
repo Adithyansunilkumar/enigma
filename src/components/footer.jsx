@@ -124,7 +124,16 @@ export default function Footer() {
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.05 }}
                             >
-                                <a href={link.href} className="text-gray-500 text-sm font-bold hover:text-purple-600 transition-colors flex items-center gap-2 group">
+                                <a 
+                                    href={link.href} 
+                                    onClick={(e) => {
+                                        if (link.href === '#contact' && window.lenis) {
+                                            e.preventDefault();
+                                            window.lenis.scrollTo('#contact', { center: true });
+                                        }
+                                    }}
+                                    className="text-gray-500 text-sm font-bold hover:text-purple-600 transition-colors flex items-center gap-2 group"
+                                >
                                     <span className="size-1 rounded-full bg-purple-200 group-hover:bg-purple-600 transition-colors" />
                                     {link.name}
                                 </a>
@@ -146,7 +155,21 @@ export default function Footer() {
                         ].map((link, index) => (
                             <li key={index}>
                                 <button
-                                    onClick={() => link.type === 'link' ? window.location.hash = link.href : setActiveModal(link.type)}
+                                    onClick={() => {
+                                        if (link.type === 'link') {
+                                            // Dispatch event to select type BEFORE scrolling
+                                            const detail = link.name.toLowerCase().includes('suggestion') ? 'technical' : 'report';
+                                            window.dispatchEvent(new CustomEvent('selectInquiryType', { detail }));
+                                            
+                                            if (window.lenis) {
+                                                window.lenis.scrollTo('#contact', { center: true });
+                                            } else {
+                                                window.location.hash = link.href;
+                                            }
+                                        } else {
+                                            setActiveModal(link.type);
+                                        }
+                                    }}
                                     className="text-gray-500 text-sm font-bold hover:text-purple-600 transition-colors flex items-center gap-2 group cursor-pointer"
                                 >
                                     <span className="size-1 rounded-full bg-purple-200 group-hover:bg-purple-600 transition-colors" />
@@ -166,7 +189,16 @@ export default function Footer() {
                         Kerala, 680588
                     </p>
                     <div className="pt-2">
-                        <a href="#contact" className="inline-flex items-center gap-2 text-purple-600 font-black text-[10px] uppercase tracking-widest hover:translate-x-1 transition-transform">
+                        <a 
+                            href="#contact" 
+                            onClick={(e) => {
+                                if (window.lenis) {
+                                    e.preventDefault();
+                                    window.lenis.scrollTo('#contact', { center: true });
+                                }
+                            }}
+                            className="inline-flex items-center gap-2 text-purple-600 font-black text-[10px] uppercase tracking-widest hover:translate-x-1 transition-transform"
+                        >
                             Contact Admin <ArrowRight size={14} />
                         </a>
                     </div>

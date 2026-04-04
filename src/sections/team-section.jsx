@@ -1,8 +1,30 @@
 import SectionTitle from "../components/section-title";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useScroll } from "framer-motion";
 import { useRef, useState } from "react";
 import { LinkedinIcon, Mail, User, ArrowRight } from "lucide-react";
 import MagneticButton from "../components/animations/MagneticButton";
+
+const members = [
+    { name: "Dr. Ramani K", role: "HOD of CSE", color: "from-logo-pink to-logo-red", image: "/assets/team/dr-ramani.jpg", linkedin: "#", email: "" },
+    { name: "Betsy Joy", role: "Association Incharge", color: "from-logo-pink to-logo-red", image: "/assets/team/betsy.jpg", linkedin: "#", email: "betsy3942@ncerc.ac.in" },
+    { name: "Alokh K", role: "Vice President", color: "from-logo-pink to-logo-red", image: "/assets/team/alokh.jpg", linkedin: "https://www.linkedin.com/in/alokh-k", email: "alokhajith007@gmail.com" },
+    { name: "Cathy Maria Noble", role: "Secretary", color: "from-logo-red to-logo-purple", image: "/assets/team/cathy.jpg", linkedin: "https://www.linkedin.com/in/cathy-noble-843111306", email: "cathynoble.info@gmail.com" },
+    { name: "Sreeram C", role: "Media Head", color: "from-logo-purple via-logo-pink to-logo-red", image: "/assets/team/sreeram.jpg", linkedin: "https://www.linkedin.com/in/sreeramchelat", email: "sreeramchelat@gmail.com" },
+    { name: "Advait Rathish", role: "Media", color: "from-logo-purple via-logo-pink to-logo-red", image: "/assets/team/advait.jpg", linkedin: "https://www.linkedin.com/in/advaitrathish", email: "advaitrathish@gmail.com" },
+    { name: "Adithyan S", role: "Webmaster", color: "from-logo-purple via-logo-pink to-logo-red", image: "/assets/team/adithyan.jpg", linkedin: "https://www.linkedin.com/in/adithyansunilkumar", email: "skradithyan@gmail.com" },
+    { name: "Abhinand Nandakumar", role: "Assistant Webmaster", color: "from-logo-red to-logo-purple", image: "/assets/team/abhinand.jpg", linkedin: "https://www.linkedin.com/in/abhinandakumar001", email: "abhinandakumar001@gmail.com" },
+    { name: "Akshara B", role: "Execom Member", color: "from-logo-purple via-logo-pink to-logo-red", image: "/assets/team/akshara.jpg", linkedin: "https://www.linkedin.com/in/akshara-balakrishnan", email: "aksharabalakrishnan159@gmail.com" },
+    { name: "Ajay p", role: "Execom Member", color: "from-logo-red to-logo-purple", image: "/assets/team/ajay.jpg", linkedin: "https://www.linkedin.com/in/ajay-p-ab1515251", email: "ajaypradeep5273@gmail.com" },
+    { name: "Rasitha C R", role: "Execom Member", color: "from-logo-red to-logo-pink", image: "/assets/team/rasitha.jpg", linkedin: "https://www.linkedin.com/in/rasitha-c-r-44a452320", email: "rasithakkd@gmail.com " },
+    { name: "Fyha Fathima", role: "Execom Member", color: "from-logo-red to-logo-purple", image: "", linkedin: "http://linkedin.com/in/fyha-fathima-78b674371", email: "fyhasnr@gmail.com" },
+    { name: "Uthara K P", role: "Execom Member", color: "from-logo-red to-logo-purple", image: "", linkedin: "#", email: "" },
+    { name: "Sradha S", role: "Execom Member", color: "from-logo-red to-logo-purple", image: "", linkedin: "#", email: "" },
+    { name: "Adarsh V", role: "Execom Member", color: "from-logo-pink to-logo-red", image: "", linkedin: "#", email: "adarshva209@gmail.com" },
+    { name: "Visal J", role: "Treasurer", color: "from-logo-purple to-logo-pink", image: "", linkedin: "https://www.linkedin.com/in/visal-techie", email: "visaljk07@gmail.com" },
+    { name: "Rohith Jayaprakash C", role: "Execom Member", color: "from-logo-pink to-logo-purple", image: "", linkedin: "#", email: "rohithjayaprakashc7549@gmail.com" },
+];
+
+const getInitials = (name) => name.split(' ').map(n => n[0]).join('');
 
 export default function TeamSection() {
     const scrollRef = useRef(null);
@@ -12,31 +34,6 @@ export default function TeamSection() {
 
     const [showAll, setShowAll] = useState(false);
 
-    const members = [
-        { name: "Dr. Ramani K", role: "HOD of CSE", color: "from-logo-pink to-logo-red", image: "/assets/team/dr-ramani.jpg", linkedin: "#", email: "[EMAIL_ADDRESS]" },
-        { name: "Betsy Joy", role: "Association Incharge", color: "from-logo-pink to-logo-red", image: "/assets/team/betsy.jpg", linkedin: "#", email: "betsy3942@ncerc.ac.in" },
-        { name: "Alokh K", role: "Vice President", color: "from-logo-pink to-logo-red", image: "/assets/team/alokh.jpg", linkedin: "https://www.linkedin.com/in/alokh-k", email: "alokhajith007@gmail.com" },
-        { name: "Cathy Maria Noble", role: "Secretary", color: "from-logo-red to-logo-purple", image: "/assets/team/cathy.jpg", linkedin: "https://www.linkedin.com/in/cathy-noble-843111306", email: "cathynoble.info@gmail.com" },
-        { name: "Sreeram C", role: "Media Head", color: "from-logo-purple via-logo-pink to-logo-red", image: "/assets/team/sreeram.jpg", linkedin: "https://www.linkedin.com/in/sreeramchelat", email: "sreeramchelat@gmail.com" },
-        { name: "Advait Rathish", role: "Media", color: "from-logo-purple via-logo-pink to-logo-red", image: "/assets/team/advait.jpg", linkedin: "https://www.linkedin.com/in/advaitrathish", email: "advaitrathish@gmail.com" },
-        { name: "Adithyan S", role: "Webmaster", color: "from-logo-purple via-logo-pink to-logo-red", image: "/assets/team/adithyan.jpg", linkedin: "https://www.linkedin.com/in/adithyansunilkumar", email: "skradithyan@gmail.com" },
-        { name: "Abhinand Nandakumar", role: "Assistant Webmaster", color: "from-logo-red to-logo-purple", image: "/assets/team/abhinand.jpg", linkedin: "https://www.linkedin.com/in/abhinandakumar001", email: "abhinandakumar001@gmail.com" },
-        { name: "Akshara B", role: "Execom Member", color: "from-logo-purple via-logo-pink to-logo-red", image: "/assets/team/akshara.jpg", linkedin: "https://www.linkedin.com/in/akshara-balakrishnan", email: "aksharabalakrishnan159@gmail.com" },
-        { name: "Ajay p", role: "Execom Member", color: "from-logo-red to-logo-purple", image: "/assets/team/ajay.jpg", linkedin: "https://www.linkedin.com/in/ajay-p-ab1515251", email: "ajaypradeep5273@gmail.com" },
-        { name: "Rasitha C R", role: "Execom Member", color: "from-logo-red to-logo-pink", image: "/assets/team/rasitha.jpg", linkedin: "https://www.linkedin.com/in/rasitha-c-r-44a452320", email: "rasithakkd@gmail.com " },
-        { name: "Fyha Fathima", role: "Execom Member", color: "from-logo-red to-logo-purple", image: "", linkedin: "http://linkedin.com/in/fyha-fathima-78b674371", email: "fyhasnr@gmail.com" },
-        { name: "Uthara K P", role: "Execom Member", color: "from-logo-red to-logo-purple", image: "", linkedin: "#", email: "[EMAIL_ADDRESS]" },
-        { name: "Sradha S", role: "Execom Member", color: "from-logo-red to-logo-purple", image: "", linkedin: "#", email: "" },
-        { name: "Adarsh V", role: "Execom Member", color: "from-logo-pink to-logo-red", image: "", linkedin: "#", email: "adarshva209@gmail.com" },
-        { name: "Visal J", role: "Treasurer", color: "from-logo-purple to-logo-pink", image: "", linkedin: "https://www.linkedin.com/in/visal-techie", email: "visaljk07@gmail.com" },
-        { name: "Rohith Jayaprakash C", role: "Execom Member", color: "from-logo-pink to-logo-purple", image: "", linkedin: "#", email: "rohithjayaprakashc7549@gmail.com" },
-    ];
-
-    const getInitials = (name) => {
-        return name.split(' ').map(n => n[0]).join('');
-    };
-
-
     return (
         <section className="py-24 md:py-32 flex flex-col items-center overflow-hidden w-full" id="team">
             <SectionTitle
@@ -44,9 +41,7 @@ export default function TeamSection() {
                 description="The passionate minds driving Enigma forward with innovation and leadership."
             />
 
-            {/* Modernized Team Container: Horizontal Carousel on Mobile, Grid on Desktop */}
             <div className="relative w-full mt-16 md:mt-24 group/carousel">
-                {/* Edge Gradients - For modern fade effect */}
                 <div className="absolute left-0 top-0 bottom-0 w-12 md:hidden bg-linear-to-r from-[#FDFDFF] to-transparent z-20 pointer-events-none" />
                 <div className="absolute right-0 top-0 bottom-0 w-12 md:hidden bg-linear-to-l from-[#FDFDFF] to-transparent z-20 pointer-events-none" />
 
@@ -75,26 +70,22 @@ export default function TeamSection() {
                                     ease: [0.22, 1, 0.36, 1]
                                 }}
                             >
-                                {/* Interactive Avatar */}
                                 <motion.div
                                     className={`relative size-28 md:size-32 rounded-3xl bg-linear-to-br ${member.color} p-1 shadow-xl`}
                                 >
                                     <div className={`relative h-full w-full overflow-hidden rounded-[calc(1.5rem-4px)] flex items-center justify-center ${!member.image ? `bg-linear-to-br ${member.color} shadow-inner` : 'bg-white'}`}>
-                                        {/* Placeholder Logo / User Icon */}
                                         {member.image && (
                                             <div className="absolute inset-0 flex items-center justify-center bg-gray-50/50">
                                                 <User className="size-14 md:size-16 text-gray-300/50" />
                                             </div>
                                         )}
 
-                                        {/* Initials (Overlay) */}
                                         <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${!member.image ? 'opacity-100' : 'opacity-0 group-hover:opacity-100 bg-white/80 backdrop-blur-sm'}`}>
                                             <span className={`text-xl md:text-2xl font-black ${!member.image ? 'text-white' : 'text-transparent bg-clip-text bg-linear-to-br from-gray-900 to-gray-600'}`}>
                                                 {getInitials(member.name)}
                                             </span>
                                         </div>
 
-                                        {/* Actual Profile Image */}
                                         {member.image && (
                                             <img
                                                 src={member.image}
@@ -162,7 +153,6 @@ export default function TeamSection() {
                 </div>
             </div>
 
-            {/* View All Button - Hidden on mobile as carousel handles all members */}
             <motion.div
                 className="mt-12 hidden md:block"
                 initial={{ opacity: 0 }}
@@ -190,7 +180,6 @@ export default function TeamSection() {
                 </MagneticButton>
             </motion.div>
 
-            {/* Modern Scroll Progress Bar (Mobile Only) */}
             <div className="md:hidden flex flex-col items-center gap-4 mt-8 opacity-60">
                 <div className="w-24 h-[3px] bg-gray-100 rounded-full relative overflow-hidden">
                     <motion.div

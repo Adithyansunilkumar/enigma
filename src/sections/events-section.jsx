@@ -6,128 +6,128 @@ import { XIcon, ChevronLeft, ChevronRight, Calendar, ArrowRight, Share2, MapPin,
 import MagneticButton from "../components/animations/MagneticButton";
 import { useIsMobile } from "../hooks/useIsMobile";
 
+const items = [
+   {
+      title: "ASSOCIATION INAUGURATION",
+      category: "Special Event",
+      date: "August 8, 2025",
+      location: "Main Auditorium, Campus North",
+      upcoming: false,
+      images: [
+         "/assets/events/inauguration/inauguration-1.jpg",
+         "/assets/events/inauguration/inauguration-2.jpg",
+         "/assets/events/inauguration/inauguration-3.jpg",
+         "/assets/events/inauguration/inauguration-4.jpg",
+      ],
+      description:
+         "The grand inauguration of ENIGMA, the CSE Students Association of NCERC, marks the start of our activities, featuring guest lectures, our annual roadmap, and a vision for innovation.",
+   },
+   {
+      title: "LOGO DESIGNING COMPETITION",
+      category: "Competition",
+      date: "October 02, 2025",
+      upcoming: false,
+      images: ["/assets/events/logo-designing/logo-designing.jpg"],
+      description:
+         "A creative challenge to design a unique logo that represents ENIGMA's values of innovation and excellence. Open to all students to showcase their artistic and digital branding skills.",
+   },
+   {
+      title: "HARDWARE WORKSHOP",
+      category: "Workshop",
+      upcoming: false,
+      date: "August 5, 2025",
+      location: "Aryabhatta Seminar Hall-510",
+      images: [
+         "/assets/events/hardware-workshop/hardware-workshop-1.jpg",
+         "/assets/events/hardware-workshop/hardware-workshop-2.jpg",
+         "/assets/events/hardware-workshop/hardware-workshop-3.jpg",
+         "/assets/events/hardware-workshop/hardware-workshop-4.jpg",
+         "/assets/events/hardware-workshop/hardware-workshop-5.jpg",
+      ],
+      description:
+         "A hands-on workshop to explore the basics of computer hardware with expert guidance. Includes dismantling and reassembling systems to understand component functionality.",
+   },
+   {
+      title: "COMPUTER NETWORKS",
+      category: "Workshop",
+      upcoming: false,
+      date: "August 11 2025",
+      location: "Advanced Computing Lab 226",
+      images: [
+         "/assets/events/computer-networks/computer-networks-1.jpg",
+         "/assets/events/computer-networks/computer-networks-2.jpg"
+      ],
+      description:
+         "A 2-Day Workshop on Computer Networks: LAN Implementation. Dive into local area networks, gain hands-on experience in configuring and troubleshooting devices.",
+   },
+   {
+      title: "E-FOOTBALL TOURNAMENT",
+      category: "Gaming",
+      upcoming: false,
+      date: "September 15 2025",
+      location: "Aryabhatta Seminar Hall-510",
+      images: ["/assets/events/e-football/e-football.jpg"],
+      description:
+         "The ultimate digital football showdown! Part of ENIGMA's efforts to blend technology with sportsmanship in a high-energy gaming environment.",
+   },
+   {
+      title: "WEB DEVELOPMENT",
+      category: "Workshop",
+      upcoming: false,
+      date: "January 22 2026",
+      location: "Advanced Computing Lab 226",
+      images: [
+         "/assets/events/web-dev/web-dev-1.jpg",
+         "/assets/events/web-dev/web-dev-2.jpg",
+         "/assets/events/web-dev/web-dev-3.jpg",
+         "/assets/events/web-dev/web-dev-4.jpg"
+      ],
+      description:
+         "An intensive workshop on building and hosting your first website, covering HTML, CSS, and modern hosting solutions.",
+   },
+   {
+      title: "INDUSTRIAL VISIT: BRIDGEON",
+      category: "Industrial Visit",
+      upcoming: false,
+      date: "February 19, 2026",
+      location: "Bridgeon, Kochi",
+      images: [
+         "/assets/industrial-visits/bridgeon/bridgeon-1.jpg",
+         "/assets/industrial-visits/bridgeon/bridgeon-2.jpg"
+      ],
+      description:
+         "A visit to Bridgeon to understand the industry workflows and the latest trends in software development and placement training.",
+   },
+   {
+      title: "INDUSTRIAL VISIT: KINFRA",
+      category: "Industrial Visit",
+      upcoming: false,
+      date: "February 14, 2026",
+      location: "Kinfra Techno Industrial Park, Kakkanchery, Malappuram",
+      images: ["/assets/industrial-visits/kinfra/kinfra.jpg"],
+      description:
+         "Exploring the infrastructure and technological ecosystem at Kinfra Techno Industrial Park to bridge the gap between academia and industry.",
+   },
+   {
+      title: "GENERAL PTA-MEETING & AWARENESS SESSION",
+      category: "Special Event",
+      upcoming: false,
+      date: "February 07, 2026",
+      time: "11:00 AM",
+      location: "Aryabhatta Seminar Hall, NCERC",
+      speaker: "Shri. Arumughan V (ASI of Police)",
+      images: ["/assets/events/pta-awareness-session/pta-awareness-session.jpg"],
+      description:
+         "A comprehensive PTA meeting and awareness session for parents of CSE and AI&ML (S4, S6, S8) students. The session features a special talk on 'Perception on Anti-Drugs and Anti-Ragging' by Shri. Arumughan V, Janamaithri Asst. District Nodal Officer, Palakkad.",
+   }
+];
+
+const sortedItems = [...items].sort((a, b) => new Date(a.date) - new Date(b.date));
+
 export default function EventsSection() {
    const isMobile = useIsMobile();
    const [selectedEvent, setSelectedEvent] = useState(null);
    const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-   const items = [
-      {
-         title: "ASSOCIATION INAUGURATION",
-         category: "Special Event",
-         date: "August 8, 2025",
-         location: "Main Auditorium, Campus North",
-         upcoming: false,
-         images: [
-            "/assets/events/inauguration/inauguration-1.jpg",
-            "/assets/events/inauguration/inauguration-2.jpg",
-            "/assets/events/inauguration/inauguration-3.jpg",
-            "/assets/events/inauguration/inauguration-4.jpg",
-         ],
-         description:
-            "The grand inauguration of ENIGMA, the CSE Students Association of NCERC, marks the start of our activities, featuring guest lectures, our annual roadmap, and a vision for innovation.",
-      },
-      {
-         title: "LOGO DESIGNING COMPETITION",
-         category: "Competition",
-         date: "October 02, 2025",
-         upcoming: false,
-         images: ["/assets/events/logo-designing/logo-designing.jpg"],
-         description:
-            "A creative challenge to design a unique logo that represents ENIGMA's values of innovation and excellence. Open to all students to showcase their artistic and digital branding skills.",
-      },
-      {
-         title: "HARDWARE WORKSHOP",
-         category: "Workshop",
-         upcoming: false,
-         date: "August 5, 2025",
-         location: "Aryabhatta Seminar Hall-510",
-         images: [
-            "/assets/events/hardware-workshop/hardware-workshop-1.jpg",
-            "/assets/events/hardware-workshop/hardware-workshop-2.jpg",
-            "/assets/events/hardware-workshop/hardware-workshop-3.jpg",
-            "/assets/events/hardware-workshop/hardware-workshop-4.jpg",
-            "/assets/events/hardware-workshop/hardware-workshop-5.jpg",
-         ],
-         description:
-            "A hands-on workshop to explore the basics of computer hardware with expert guidance. Includes dismantling and reassembling systems to understand component functionality.",
-      },
-      {
-         title: "COMPUTER NETWORKS",
-         category: "Workshop",
-         upcoming: false,
-         date: "August 11 2025",
-         location: "Advanced Computing Lab 226",
-         images: [
-            "/assets/events/computer-networks/computer-networks-1.jpg",
-            "/assets/events/computer-networks/computer-networks-2.jpg"
-         ],
-         description:
-            "A 2-Day Workshop on Computer Networks: LAN Implementation. Dive into local area networks, gain hands-on experience in configuring and troubleshooting devices.",
-      },
-      {
-         title: "E-FOOTBALL TOURNAMENT",
-         category: "Gaming",
-         upcoming: false,
-         date: "September 15 2025",
-         location: "Aryabhatta Seminar Hall-510",
-         images: ["/assets/events/e-football/e-football.jpg"],
-         description:
-            "The ultimate digital football showdown! Part of ENIGMA's efforts to blend technology with sportsmanship in a high-energy gaming environment.",
-      },
-      {
-         title: "WEB DEVELOPMENT",
-         category: "Workshop",
-         upcoming: false,
-         date: "January 22 2026",
-         location: "Advanced Computing Lab 226",
-         images: [
-            "/assets/events/web-dev/web-dev-1.jpg",
-            "/assets/events/web-dev/web-dev-2.jpg",
-            "/assets/events/web-dev/web-dev-3.jpg",
-            "/assets/events/web-dev/web-dev-4.jpg"
-         ],
-         description:
-            "An intensive workshop on building and hosting your first website, covering HTML, CSS, and modern hosting solutions.",
-      },
-      {
-         title: "INDUSTRIAL VISIT: BRIDGEON",
-         category: "Industrial Visit",
-         upcoming: false,
-         date: "February 19, 2026",
-         location: "Bridgeon, Kochi",
-         images: [
-            "/assets/industrial-visits/bridgeon/bridgeon-1.jpg",
-            "/assets/industrial-visits/bridgeon/bridgeon-2.jpg"
-         ],
-         description:
-            "A visit to Bridgeon to understand the industry workflows and the latest trends in software development and placement training.",
-      },
-      {
-         title: "INDUSTRIAL VISIT: KINFRA",
-         category: "Industrial Visit",
-         upcoming: false,
-         date: "February 14, 2026",
-         location: "Kinfra Techno Industrial Park, Kakkanchery, Malappuram",
-         images: ["/assets/industrial-visits/kinfra/kinfra.jpg"],
-         description:
-            "Exploring the infrastructure and technological ecosystem at Kinfra Techno Industrial Park to bridge the gap between academia and industry.",
-      },
-      {
-         title: "GENERAL PTA-MEETING & AWARENESS SESSION",
-         category: "Special Event",
-         upcoming: false,
-         date: "February 07, 2026",
-         time: "11:00 AM",
-         location: "Aryabhatta Seminar Hall, NCERC",
-         speaker: "Shri. Arumughan V (ASI of Police)",
-         images: ["/assets/events/pta-awareness-session/pta-awareness-session.jpg"],
-         description:
-            "A comprehensive PTA meeting and awareness session for parents of CSE and AI&ML (S4, S6, S8) students. The session features a special talk on 'Perception on Anti-Drugs and Anti-Ragging' by Shri. Arumughan V, Janamaithri Asst. District Nodal Officer, Palakkad.",
-      }
-   ];
-
-   const sortedItems = [...items].sort((a, b) => new Date(a.date) - new Date(b.date));
 
    const openModal = (event) => {
       setSelectedEvent(event);

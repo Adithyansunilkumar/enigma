@@ -1,6 +1,6 @@
 // ENIGMA – Contact Section
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, MapPin, Send, Cpu, CheckCircle2 } from "lucide-react";
 
 export default function ContactSection() {
@@ -11,6 +11,14 @@ export default function ContactSection() {
         type: "general",
         message: ""
     });
+
+    useEffect(() => {
+        const handleTypeSelect = (e) => {
+            setFormData(prev => ({ ...prev, type: e.detail }));
+        };
+        window.addEventListener('selectInquiryType', handleTypeSelect);
+        return () => window.removeEventListener('selectInquiryType', handleTypeSelect);
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -30,7 +38,7 @@ export default function ContactSection() {
         setStatus("sending");
 
         // Construct mailto Link
-        const recipient = "macqadithyan@gmail.com";
+        const recipient = "ncercenigma@gmail.com";
         const subject = encodeURIComponent("Message from Website");
         const bodyContent = `Name: ${formData.name}\nType: ${formData.type}\n\nMessage:\n${formData.message}`;
         const body = encodeURIComponent(bodyContent);
@@ -55,7 +63,7 @@ export default function ContactSection() {
             viewport={{ once: true }}
             transition={{ type: "spring", stiffness: 200, damping: 40 }}
         >
-            <div className="max-w-7xl mx-auto relative group">
+            <div className="max-w-7xl mx-auto relative">
                 <div className="grid lg:grid-cols-2 gap-8 md:gap-12 relative z-10">
                     {/* Left Card – Info */}
                     <motion.div
@@ -80,7 +88,7 @@ export default function ContactSection() {
                             </div>
 
                             <div className="space-y-8">
-                                <motion.div className="flex items-center gap-6 group/link cursor-pointer"
+                                <motion.div className="flex items-center gap-6 cursor-pointer"
                                     initial={{ x: -20, opacity: 0 }}
                                     whileInView={{ x: 0, opacity: 1 }}
                                     viewport={{ once: true }}
@@ -99,54 +107,23 @@ export default function ContactSection() {
                                     <div>
                                         <p className="text-[10px] text-gray-400 uppercase font-black tracking-[0.2em] mb-1">Email Us</p>
                                         <motion.a
-                                            href="mailto:contact@enigma-cse.org"
+                                            href="mailto:ncercenigma@gmail.com"
                                             className="text-[#1A1A1B] text-xl font-black tracking-tight"
                                             variants={{
                                                 hover: { color: "var(--color-logo-purple)" }
                                             }}
                                             transition={{ duration: 0.2 }}
                                         >
-                                            contact@enigma-cse.org
+                                            ncercenigma@gmail.com
                                         </motion.a>
                                     </div>
                                 </motion.div>
 
-                                <motion.div className="flex items-center gap-6 group/link cursor-pointer"
+                                <motion.div className="flex items-center gap-6 cursor-pointer"
                                     initial={{ x: -20, opacity: 0 }}
                                     whileInView={{ x: 0, opacity: 1 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.2 }}
-                                    whileHover="hover"
-                                >
-                                    <motion.div
-                                        className="size-16 rounded-[24px] bg-white shadow-sm border border-gray-100 flex items-center justify-center text-logo-pink"
-                                        variants={{
-                                            hover: { scale: 1.05, backgroundColor: "var(--color-logo-pink-50)", borderColor: "var(--color-logo-pink-200)" }
-                                        }}
-                                        transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                                    >
-                                        <Cpu size={28} />
-                                    </motion.div>
-                                    <div>
-                                        <p className="text-[10px] text-gray-400 uppercase font-black tracking-[0.2em] mb-1">Technical Support</p>
-                                        <motion.a
-                                            href="mailto:tech@enigma-cse.org"
-                                            className="text-[#1A1A1B] text-xl font-black tracking-tight"
-                                            variants={{
-                                                hover: { color: "var(--color-logo-pink)" }
-                                            }}
-                                            transition={{ duration: 0.2 }}
-                                        >
-                                            tech@enigma-cse.org
-                                        </motion.a>
-                                    </div>
-                                </motion.div>
-
-                                <motion.div className="flex items-center gap-6 group/link cursor-pointer"
-                                    initial={{ x: -20, opacity: 0 }}
-                                    whileInView={{ x: 0, opacity: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: 0.3 }}
                                     whileHover="hover"
                                     onClick={() => window.open("https://maps.app.goo.gl/NMvNrogouDgfrRRy9", "_blank")}
                                 >
@@ -190,7 +167,7 @@ export default function ContactSection() {
                         viewport={{ once: true }}
                     >
                         <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
-                            <div className="space-y-3">
+                            <div className="flex flex-col gap-4">
                                 <label htmlFor="name" className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-2">Full Name</label>
                                 <input
                                     id="name"
@@ -203,7 +180,7 @@ export default function ContactSection() {
                                 />
                             </div>
 
-                            <div className="space-y-3 relative">
+                            <div className="flex flex-col gap-4 relative">
                                 <label htmlFor="type" className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-2">Inquiry Type</label>
                                 <div className="relative group/select">
                                     <select
@@ -215,6 +192,7 @@ export default function ContactSection() {
                                     >
                                         <option value="general">General Inquiry</option>
                                         <option value="technical">Technical Suggestion</option>
+                                        <option value="report">Report an Issue</option>
                                         <option value="collaboration">Collaboration</option>
                                     </select>
                                     <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400 group-focus-within/select:text-logo-purple transition-colors">
@@ -225,7 +203,7 @@ export default function ContactSection() {
                                 </div>
                             </div>
 
-                            <div className="space-y-3">
+                            <div className="flex flex-col gap-4">
                                 <label htmlFor="message" className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-2">Your Message</label>
                                 <textarea
                                     id="message"

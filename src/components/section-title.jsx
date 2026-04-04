@@ -17,7 +17,6 @@ export default function SectionTitle({ title, description }) {
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 240, damping: 70, mass: 1 }}
             >
-
                 {description}
             </motion.p>
         </div>
