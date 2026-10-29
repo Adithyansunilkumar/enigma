@@ -7,23 +7,16 @@ export default function LenisScroll() {
 
     useEffect(() => {
         const lenis = new Lenis({
-            duration: isMobile ? 0.8 : 1.2,
+            lerp: isMobile ? 0.08 : 0.1,
+            wheelMultiplier: 1.0,
             smoothWheel: true,
             smoothTouch: false,
-            wheelMultiplier: 1.0,
-            lerp: isMobile ? 0.08 : 0.12,
+            autoRaf: true,
             anchors: true,
         });
 
         // Expose lenis instance globally
         window.lenis = lenis;
-
-        const raf = (time) => {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        };
-
-        requestAnimationFrame(raf);
 
         return () => {
             lenis.destroy();

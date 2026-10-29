@@ -57,38 +57,38 @@ export default function ContactSection() {
     };
 
     return (
-        <motion.section className="py-24 md:py-32 px-6" id="contact"
+        <motion.section className="py-16 sm:py-24 md:py-32 px-4 sm:px-6" id="contact"
             initial={{ y: 50, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ type: "spring", stiffness: 200, damping: 40 }}
         >
             <div className="max-w-7xl mx-auto relative">
-                <div className="grid lg:grid-cols-2 gap-8 md:gap-12 relative z-10">
+                <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 relative z-10">
                     {/* Left Card – Info */}
                     <motion.div
-                        className="glass p-8 md:p-12 lg:p-16 rounded-[48px] border border-white shadow-md flex flex-col justify-between"
+                        className="bg-white/95 p-6 sm:p-8 md:p-12 lg:p-16 rounded-[32px] sm:rounded-[40px] md:rounded-[48px] border border-gray-100 shadow-sm flex flex-col justify-between"
                         initial={{ x: -30, opacity: 0 }}
                         whileInView={{ x: 0, opacity: 1 }}
                         viewport={{ once: true }}
                     >
-                        <div className="space-y-10">
-                            <div className="space-y-6">
+                        <div className="space-y-8 sm:space-y-10">
+                            <div className="space-y-4 sm:space-y-6">
                                 <motion.span
-                                    className="inline-block px-5 py-2 rounded-full bg-logo-purple/10 text-logo-purple text-[10px] font-black uppercase tracking-[0.2em]"
+                                    className="inline-block px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-logo-purple/10 text-logo-purple text-[10px] font-black uppercase tracking-[0.2em]"
                                 >
                                     Get in Touch
                                 </motion.span>
-                                <h2 className="text-4xl md:text-5xl font-black leading-[1.1] text-[#1A1A1B] tracking-tight">
+                                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black leading-[1.15] sm:leading-[1.1] text-[#1A1A1B] tracking-tight">
                                     Let's build the <span className="text-logo-pink">future</span> together.
                                 </h2>
-                                <p className="text-gray-500 text-lg leading-relaxed max-w-md font-medium">
+                                <p className="text-gray-500 text-base sm:text-lg leading-relaxed max-w-md font-medium">
                                     Whether you're interested in joining, partnering, or just learning more, we're here to connect.
                                 </p>
                             </div>
 
-                            <div className="space-y-8">
-                                <motion.div className="flex items-center gap-6 cursor-pointer"
+                            <div className="space-y-6 sm:space-y-8">
+                                <motion.div className="flex items-center gap-4 sm:gap-6 cursor-pointer group"
                                     initial={{ x: -20, opacity: 0 }}
                                     whileInView={{ x: 0, opacity: 1 }}
                                     viewport={{ once: true }}
@@ -96,19 +96,19 @@ export default function ContactSection() {
                                     whileHover="hover"
                                 >
                                     <motion.div
-                                        className="size-16 rounded-[24px] bg-white shadow-sm border border-gray-100 flex items-center justify-center text-logo-purple"
+                                        className="size-13 sm:size-14 md:size-16 rounded-2xl md:rounded-[24px] bg-white shadow-sm border border-gray-100 flex items-center justify-center text-logo-purple shrink-0"
                                         variants={{
                                             hover: { scale: 1.05, backgroundColor: "#F5F3FF", borderColor: "#DDD6FE" }
                                         }}
                                         transition={{ type: "spring", stiffness: 400, damping: 25 }}
                                     >
-                                        <Mail size={28} />
+                                        <Mail className="size-6 md:size-7" />
                                     </motion.div>
-                                    <div>
+                                    <div className="min-w-0 flex-1">
                                         <p className="text-[10px] text-gray-400 uppercase font-black tracking-[0.2em] mb-1">Email Us</p>
                                         <motion.a
                                             href="mailto:ncercenigma@gmail.com"
-                                            className="text-[#1A1A1B] text-xl font-black tracking-tight"
+                                            className="text-[#1A1A1B] text-base sm:text-lg md:text-xl font-black tracking-tight break-all sm:break-normal block"
                                             variants={{
                                                 hover: { color: "var(--color-logo-purple)" }
                                             }}
@@ -119,7 +119,7 @@ export default function ContactSection() {
                                     </div>
                                 </motion.div>
 
-                                <motion.div className="flex items-center gap-6 cursor-pointer"
+                                <motion.div className="flex items-center gap-4 sm:gap-6 cursor-pointer group"
                                     initial={{ x: -20, opacity: 0 }}
                                     whileInView={{ x: 0, opacity: 1 }}
                                     viewport={{ once: true }}
@@ -128,21 +128,21 @@ export default function ContactSection() {
                                     onClick={() => window.open("https://maps.app.goo.gl/NMvNrogouDgfrRRy9", "_blank")}
                                 >
                                     <motion.div
-                                        className="size-16 rounded-[24px] bg-white shadow-sm border border-gray-100 flex items-center justify-center text-logo-red"
+                                        className="size-13 sm:size-14 md:size-16 rounded-2xl md:rounded-[24px] bg-white shadow-sm border border-gray-100 flex items-center justify-center text-logo-red shrink-0"
                                         variants={{
-                                            hover: { scale: 1.05, backgroundColor: "var(--color-logo-red-50)", borderColor: "var(--color-logo-red-200)" }
+                                            hover: { scale: 1.05, backgroundColor: "#FFF1F2", borderColor: "#FECDD3" }
                                         }}
                                         transition={{ type: "spring", stiffness: 400, damping: 25 }}
                                     >
-                                        <MapPin size={28} />
+                                        <MapPin className="size-6 md:size-7" />
                                     </motion.div>
-                                    <div>
+                                    <div className="min-w-0 flex-1">
                                         <p className="text-[10px] text-gray-400 uppercase font-black tracking-[0.2em] mb-1">Locate Us</p>
                                         <motion.a
                                             href="https://maps.app.goo.gl/NMvNrogouDgfrRRy9"
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-[#1A1A1B] text-xl font-black tracking-tight"
+                                            className="text-[#1A1A1B] text-base sm:text-lg md:text-xl font-black tracking-tight leading-snug block"
                                             variants={{
                                                 hover: { color: "var(--color-logo-red)" }
                                             }}
@@ -161,13 +161,13 @@ export default function ContactSection() {
 
                     {/* Right Card – Form */}
                     <motion.div
-                        className="glass p-8 md:p-12 lg:p-16 rounded-[48px] border border-white shadow-md"
+                        className="bg-white/95 p-6 sm:p-8 md:p-12 lg:p-16 rounded-[32px] sm:rounded-[40px] md:rounded-[48px] border border-gray-100 shadow-sm"
                         initial={{ x: 30, opacity: 0 }}
                         whileInView={{ x: 0, opacity: 1 }}
                         viewport={{ once: true }}
                     >
-                        <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
-                            <div className="flex flex-col gap-4">
+                        <form className="flex flex-col gap-5 sm:gap-6" onSubmit={handleSubmit}>
+                            <div className="flex flex-col gap-3 sm:gap-4">
                                 <label htmlFor="name" className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-2">Full Name</label>
                                 <input
                                     id="name"
@@ -176,11 +176,11 @@ export default function ContactSection() {
                                     value={formData.name}
                                     onChange={handleChange}
                                     placeholder="Enter your name"
-                                    className={`w-full bg-white/60 border ${error && !formData.name ? 'border-red-300 ring-4 ring-red-500/10' : 'border-white'} rounded-[24px] p-5 focus:outline-none focus:ring-4 focus:ring-logo-purple/10 focus:border-logo-purple/30 transition-all font-bold text-[#1A1A1B] placeholder-gray-300 shadow-sm`}
+                                    className={`w-full bg-gray-50/70 border ${error && !formData.name ? 'border-red-300 ring-4 ring-red-500/10' : 'border-gray-200/80'} rounded-2xl sm:rounded-[24px] p-4 sm:p-5 focus:outline-none focus:ring-4 focus:ring-logo-purple/10 focus:border-logo-purple/30 focus:bg-white transition-all font-bold text-base text-[#1A1A1B] placeholder-gray-400 shadow-xs`}
                                 />
                             </div>
 
-                            <div className="flex flex-col gap-4 relative">
+                            <div className="flex flex-col gap-3 sm:gap-4 relative">
                                 <label htmlFor="type" className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-2">Inquiry Type</label>
                                 <div className="relative group/select">
                                     <select
@@ -188,22 +188,22 @@ export default function ContactSection() {
                                         name="type"
                                         value={formData.type}
                                         onChange={handleChange}
-                                        className="w-full bg-white/60 border border-white rounded-[24px] p-5 focus:outline-none focus:ring-4 focus:ring-logo-purple/10 focus:border-logo-purple/30 transition-all font-bold text-[#1A1A1B] appearance-none cursor-pointer pr-12 shadow-sm"
+                                        className="w-full bg-gray-50/70 border border-gray-200/80 rounded-2xl sm:rounded-[24px] p-4 sm:p-5 focus:outline-none focus:ring-4 focus:ring-logo-purple/10 focus:border-logo-purple/30 focus:bg-white transition-all font-bold text-base text-[#1A1A1B] appearance-none cursor-pointer pr-12 shadow-xs"
                                     >
                                         <option value="general">General Inquiry</option>
                                         <option value="technical">Technical Suggestion</option>
                                         <option value="report">Report an Issue</option>
                                         <option value="collaboration">Collaboration</option>
                                     </select>
-                                    <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400 group-focus-within/select:text-logo-purple transition-colors">
-                                        <svg className="size-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div className="absolute right-5 sm:right-6 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400 group-focus-within/select:text-logo-purple transition-colors">
+                                        <svg className="size-5 sm:size-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
                                         </svg>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="flex flex-col gap-4">
+                            <div className="flex flex-col gap-3 sm:gap-4">
                                 <label htmlFor="message" className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-2">Your Message</label>
                                 <textarea
                                     id="message"
@@ -211,8 +211,8 @@ export default function ContactSection() {
                                     value={formData.message}
                                     onChange={handleChange}
                                     placeholder="Tell us about your project or query..."
-                                    rows={5}
-                                    className={`w-full bg-white/60 border ${error && !formData.message ? 'border-red-300 ring-4 ring-red-500/10' : 'border-white'} rounded-[24px] p-5 focus:outline-none focus:ring-4 focus:ring-logo-purple/10 focus:border-logo-purple/30 transition-all font-bold text-[#1A1A1B] placeholder-gray-300 resize-none shadow-sm`}
+                                    rows={4}
+                                    className={`w-full bg-gray-50/70 border ${error && !formData.message ? 'border-red-300 ring-4 ring-red-500/10' : 'border-gray-200/80'} rounded-2xl sm:rounded-[24px] p-4 sm:p-5 focus:outline-none focus:ring-4 focus:ring-logo-purple/10 focus:border-logo-purple/30 focus:bg-white transition-all font-bold text-base text-[#1A1A1B] placeholder-gray-400 resize-none shadow-xs`}
                                 />
                             </div>
 
@@ -235,13 +235,13 @@ export default function ContactSection() {
                                 {status === "success" ? (
                                     <motion.div
                                         key="success"
-                                        className="flex items-center gap-4 bg-emerald-50 text-emerald-600 p-6 rounded-[24px] border border-emerald-100 font-black text-xs uppercase tracking-widest shadow-xl shadow-emerald-500/10"
+                                        className="flex items-center gap-3 sm:gap-4 bg-emerald-50 text-emerald-600 p-4 sm:p-6 rounded-2xl sm:rounded-[24px] border border-emerald-100 font-black text-xs uppercase tracking-widest shadow-xl shadow-emerald-500/10"
                                         initial={{ opacity: 0, scale: 0.95 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.95 }}
                                     >
-                                        <CheckCircle2 size={24} />
-                                        Email client opened successfully
+                                        <CheckCircle2 className="size-5 sm:size-6 shrink-0" />
+                                        <span className="text-[11px] sm:text-xs">Email client opened successfully</span>
                                     </motion.div>
                                 ) : (
                                     <motion.button
@@ -249,7 +249,7 @@ export default function ContactSection() {
                                         type="submit"
                                         aria-label="Send message via email"
                                         disabled={status === "sending"}
-                                        className={`group flex items-center justify-center gap-4 w-full py-6 rounded-[28px] text-white font-black text-xs uppercase tracking-[0.2em] transition-all mt-4 active:scale-95 shadow-lg ${status === "sending" ? "bg-gray-400 cursor-not-allowed" : "bg-linear-to-r from-logo-purple via-logo-pink to-logo-red hover:opacity-90 hover:shadow-xl hover:shadow-logo-purple/30"}`}
+                                        className={`group flex items-center justify-center gap-3 sm:gap-4 w-full py-4 sm:py-5 md:py-6 rounded-2xl sm:rounded-[24px] md:rounded-[28px] text-white font-black text-xs uppercase tracking-[0.2em] transition-all mt-2 sm:mt-4 active:scale-95 shadow-lg min-h-[50px] sm:min-h-[56px] ${status === "sending" ? "bg-gray-400 cursor-not-allowed" : "bg-linear-to-r from-logo-purple via-logo-pink to-logo-red hover:opacity-90 hover:shadow-xl hover:shadow-logo-purple/30"}`}
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
                                         exit={{ opacity: 0 }}

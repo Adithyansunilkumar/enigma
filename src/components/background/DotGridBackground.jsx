@@ -141,12 +141,29 @@ const DotGridBackground = ({
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    const [isVisible, setIsVisible] = useState(true);
+
+    useEffect(() => {
+        const wrap = wrapperRef.current;
+        if (!wrap || typeof IntersectionObserver === 'undefined') return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsVisible(entry.isIntersecting);
+            },
+            { rootMargin: '100px 0px' }
+        );
+
+        observer.observe(wrap);
+        return () => observer.disconnect();
+    }, []);
+
     useEffect(() => {
         buildGrid();
     }, [buildGrid, windowSize]);
 
     useEffect(() => {
-        if (!circlePath) return;
+        if (!circlePath || !isVisible) return;
 
         let rafId;
         const proxSq = props.proximity * props.proximity;
@@ -190,9 +207,11 @@ const DotGridBackground = ({
 
         draw();
         return () => cancelAnimationFrame(rafId);
-    }, [props.proximity, props.baseColor, activeRgb, baseRgb, circlePath]);
+    }, [props.proximity, props.baseColor, activeRgb, baseRgb, circlePath, isVisible]);
 
     useEffect(() => {
+        if (!isVisible) return;
+
         const onMove = (e) => {
             const now = performance.now();
             const pr = pointerRef.current;
@@ -292,7 +311,7 @@ const DotGridBackground = ({
             window.removeEventListener('mousemove', throttledMove);
             window.removeEventListener('click', onClick);
         };
-    }, [props.maxSpeed, props.speedTrigger, props.proximity, props.returnDuration, props.shockRadius, props.shockStrength, props.resistance]);
+    }, [isVisible, props.maxSpeed, props.speedTrigger, props.proximity, props.returnDuration, props.shockRadius, props.shockStrength, props.resistance]);
 
     return (
         <div className={`dot-grid-container ${className} overflow-hidden`} style={{ width: '100%', height: '100%', ...style }} ref={wrapperRef}>

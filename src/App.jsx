@@ -11,12 +11,7 @@ const TeamSection = lazy(() => import("./sections/team-section"));
 const NsiteProjectsSection = lazy(() => import("./sections/nsite-projects-section"));
 const ContactSection = lazy(() => import("./sections/contact-section"));
 
-import { useIsMobile } from "./hooks/useIsMobile";
-import { useReducedMotion } from "./hooks/useReducedMotion";
-
 export default function App() {
-    const isMobile = useIsMobile();
-    const reducedMotion = useReducedMotion();
 
     useEffect(() => {
         // Force scroll to top on refresh

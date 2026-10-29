@@ -93,7 +93,7 @@ export default function NsiteProjectsSection() {
 function ProjectCard({ project, index }) {
     return (
         <motion.div
-            className="group relative flex flex-col rounded-[40px] bg-white border border-gray-100 shadow-sm overflow-hidden will-change-transform"
+            className="group relative flex flex-col rounded-[40px] bg-white border border-gray-100 shadow-sm overflow-hidden"
             initial={{ y: 30, opacity: 0, scale: 0.95 }}
             whileInView={{ y: 0, opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-50px" }}

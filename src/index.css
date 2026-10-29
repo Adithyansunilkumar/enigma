@@ -29,7 +29,7 @@
 
 @layer components {
     .glass {
-        @apply bg-white/70 border border-gray-200/60 shadow-sm backdrop-blur-md;
+        @apply bg-white/80 border border-gray-200/60 shadow-sm;
     }
 
     .btn {
