@@ -51,3 +51,10 @@
         transition-delay: 0s !important;
     }
 }
+@utility no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}

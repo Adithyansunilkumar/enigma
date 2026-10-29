@@ -149,6 +149,11 @@ export default function TeamSection() {
         container: scrollRef
     });
 
+    const pastScrollRef = useRef(null);
+    const { scrollXProgress: pastScrollXProgress } = useScroll({
+        container: pastScrollRef
+    });
+
     const [showAll, setShowAll] = useState(false);
 
     return (
@@ -225,16 +230,32 @@ export default function TeamSection() {
                     description="Recognizing the executive members and key contributors of previous tenures."
                 />
 
-                <div className="flex flex-wrap justify-center gap-6 md:gap-10 mt-12 md:mt-16 px-4 sm:px-6 w-full">
-                    {oldMembers.map((member, index) => (
-                        <div key={member.name} className="w-[280px] sm:w-[320px]">
+                <div className="relative w-full mt-16 md:mt-24 group/carousel">
+                    <div className="absolute left-0 top-0 bottom-0 w-12 md:hidden bg-linear-to-r from-[#FDFDFF] to-transparent z-20 pointer-events-none" />
+                    <div className="absolute right-0 top-0 bottom-0 w-12 md:hidden bg-linear-to-l from-[#FDFDFF] to-transparent z-20 pointer-events-none" />
+
+                    <div
+                        ref={pastScrollRef}
+                        className='flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 px-[calc(50%-140px)] sm:px-[calc(50%-160px)] md:px-12 w-full max-w-7xl mx-auto overflow-x-auto md:overflow-visible pb-16 md:pb-0 snap-x snap-mandatory no-scrollbar scroll-smooth'
+                    >
+                        {oldMembers.map((member, index) => (
                             <TeamMemberCard
+                                key={member.name}
                                 member={member}
                                 index={index}
-                                className="w-full"
                             />
-                        </div>
-                    ))}
+                        ))}
+                    </div>
+                </div>
+
+                <div className="md:hidden flex flex-col items-center gap-4 mt-8 opacity-60">
+                    <div className="w-24 h-[3px] bg-gray-100 rounded-full relative overflow-hidden">
+                        <motion.div
+                            className="absolute inset-y-0 left-0 w-full bg-linear-to-r from-logo-purple to-logo-pink origin-left"
+                            style={{ scaleX: pastScrollXProgress }}
+                        />
+                    </div>
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400">Scroll to explore</p>
                 </div>
             </div>
         </section>
